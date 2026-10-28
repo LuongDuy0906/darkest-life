@@ -12,14 +12,20 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private float _moveX;
     private float _moveY;
+    private SpriteRenderer playerSpriteRender;
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerSpriteRender = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable() {
         moveInput.action.Enable();
+    }
+
+    private void OnDisable() {
+        moveInput.action.Disable();
     }
 
     private void Update() {
@@ -36,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed * _moveY);
 
         if (_moveX != 0)
-            transform.localScale = new Vector3(Mathf.Sign(_moveX), 1, 1);
+            playerSpriteRender.flipX = _moveX < 0;
     }
 
     private void UpdateAnimation()
