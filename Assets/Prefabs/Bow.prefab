@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 783778283307858284}
   - component: {fileID: 1742051948188244485}
+  - component: {fileID: 3618333254835729776}
+  - component: {fileID: 191243114649194202}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
@@ -91,3 +93,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &3618333254835729776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339283340742809282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dedeba5de1873446a5874c75bdb27b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponRotation
+--- !u!114 &191243114649194202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7339283340742809282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187fc2d9bd820dc4985ddd60385b4e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponShooting
+  arrowsPrefab: {fileID: 7384316790564666247, guid: fe1d79d46458b234f8ec55d17d5c7d23, type: 3}
