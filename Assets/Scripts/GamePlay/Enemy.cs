@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {   
     public static Action<GameObject> OnEnemyDestroy;
+    public static Action<float> OnEnemyDamage;
 
     [SerializeField] private EnemyData data;
 
@@ -45,4 +46,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            OnEnemyDamage?.Invoke(data.damage);
+        }
+    }
 }

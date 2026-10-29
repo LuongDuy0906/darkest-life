@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: OrcEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHealth: 2
+  damage: 10
