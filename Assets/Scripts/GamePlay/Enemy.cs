@@ -1,15 +1,22 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {   
+    public static Action<GameObject> OnEnemyDestroy;
+
+    [SerializeField] private EnemyData data;
+
     private Transform playerObject;
     private SpriteRenderer enemyRender;
     private float speed = 1.5f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float _currentHealth;
+
+    void Awake()
     {
         playerObject = FindAnyObjectByType<PlayerMovement>().transform;
-        enemyRender = GetComponent<SpriteRenderer>();
+        enemyRender = GetComponent<SpriteRenderer>();   
+        _currentHealth = data.maxHealth;     
     }
 
     // Update is called once per frame
@@ -27,4 +34,15 @@ public class Enemy : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, playerObject.position, speed * Time.deltaTime);
     }
+    
+    public void TakeDamage(int damage)
+    {
+        _currentHealth = Mathf.Max(0, _currentHealth - damage);
+
+        if(_currentHealth == 0)
+        {
+            OnEnemyDestroy?.Invoke(gameObject);
+        }
+    }
+
 }

@@ -7,13 +7,18 @@ public class SpawnManager : MonoBehaviour
     private float maxDistance = 12f;
     private Transform playerPosition;
     private float delaySpawnTime;
-    private float defaultDelaySpawnTime = 2f;
+    private float defaultDelaySpawnTime = 1f;
 
     void Awake()
     {
         orcPool = GetComponentInChildren<ObjectPooler>();
         playerPosition = FindAnyObjectByType<PlayerMovement>().transform;
         delaySpawnTime = defaultDelaySpawnTime;
+    }
+
+    void OnEnable()
+    {
+        Enemy.OnEnemyDestroy += HandleEnemyDestroy;
     }
 
     void Update()
@@ -47,5 +52,10 @@ public class SpawnManager : MonoBehaviour
         ) * distance;
 
         return spawnPosition;
+    }
+
+    private void HandleEnemyDestroy(GameObject enemy)
+    {
+        orcPool.RestorePool(enemy);
     }
 }

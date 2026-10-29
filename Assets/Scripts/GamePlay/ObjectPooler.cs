@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,5 +31,11 @@ public class ObjectPooler : MonoBehaviour
         enemy.transform.position = spawnPosition;
         enemy.SetActive(true);
         return enemy;
+    }
+
+    public void RestorePool(GameObject enemy)
+    {
+        enemy.SetActive(false);
+        available.Enqueue(enemy);
     }
 }

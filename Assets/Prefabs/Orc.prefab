@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa1d9926723c97469f2e65e7c06b82a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  data: {fileID: 11400000, guid: c9e5a2c12db1b1344a9a60e2194c0d54, type: 2}
 --- !u!95 &8763054475052118970
 Animator:
   serializedVersion: 7
