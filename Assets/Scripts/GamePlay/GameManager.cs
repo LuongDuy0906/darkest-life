@@ -4,7 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static Action<int> OnScoreChanged;
-    public static Action OnGameOver;
+    public static Action<int, float> OnGameOver;
 
     private int _totalScore = 0;
     private bool _isGameOver = false;
@@ -42,10 +42,11 @@ public class GameManager : MonoBehaviour
 
         if(_totalScore >= bestScore)
         {
-            PlayerPrefs.SetInt("currentScore", _totalScore);
+            PlayerPrefs.SetInt("bestScore", _totalScore);
         }
 
         PlayerPrefs.SetFloat("timeSurvice", _timeSurvive);
+        PlayerPrefs.Save();
     }
 
     private void SetTimeScale(int timeScale)
@@ -58,6 +59,6 @@ public class GameManager : MonoBehaviour
         _isGameOver = true;
         SetTimeScale(0);
         StorePlayerStat();
-        OnGameOver?.Invoke();
+        OnGameOver?.Invoke(_totalScore, _timeSurvive);
     }   
 }
