@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     void OnEnable()
     {
         GameManager.OnScoreChanged += HandleScoreChanged;
+        GameManager.OnGameOver += HandleGameOver;
     }
 
     private void UpdateGamePlayUI(int score)
@@ -22,5 +23,10 @@ public class UIManager : MonoBehaviour
     private void HandleScoreChanged(int score)
     {
         UpdateGamePlayUI(score);
+    }
+
+    private void HandleGameOver()
+    {
+        gamePlayUI.UpdateGamePlayUI();
     }
 }

@@ -3,15 +3,24 @@ using UnityEngine;
 
 public class GamePlayUI : MonoBehaviour
 {
-    private TextMeshProUGUI scoreText;
+    [SerializeField] private GameObject gameOverUI;
+
+    private TextMeshProUGUI _scoreText;
 
     void Awake()
     {
-        scoreText = FindAnyObjectByType<TextMeshProUGUI>();
+        _scoreText = FindAnyObjectByType<TextMeshProUGUI>();
+        gameOverUI.SetActive(false);
     }
 
     public void UpdateScoreText(int score)
     {
-        scoreText.text = score.ToString();
+        _scoreText.text = score.ToString();
+    }
+
+    public void UpdateGamePlayUI()
+    {
+        gameOverUI.SetActive(true);
+        _scoreText.gameObject.SetActive(false);
     }
 }

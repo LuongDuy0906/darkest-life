@@ -42,14 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI
-    uniqueID: 2680010801
+  - name: Background
+    uniqueID: 2280655887
     locked: 0
   - name: Player
     uniqueID: 2628309521
     locked: 0
   - name: Arrow and Bow
     uniqueID: 1545851387
+    locked: 0
+  - name: UI
+    uniqueID: 2680010801
     locked: 0
   m_RenderingLayers:
   - Default

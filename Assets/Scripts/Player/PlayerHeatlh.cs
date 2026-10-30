@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerHeatlh : MonoBehaviour
 {
+    public static Action OnPlayerDie;
+
     [SerializeField] private Transform healthBar;
 
     private float _currentLives;
@@ -20,6 +22,11 @@ public class PlayerHeatlh : MonoBehaviour
         Enemy.OnEnemyDamage += HandleTakeDamage;
     }
 
+    void OnDisable()
+    {
+        Enemy.OnEnemyDamage -= HandleTakeDamage;
+    }
+
     private void UpdateHealthBar()
     {
         float healthPercent = _currentLives / _maxLives;
@@ -34,5 +41,10 @@ public class PlayerHeatlh : MonoBehaviour
         _currentLives -= damage;
         _currentLives = Mathf.Max(_currentLives, 0);
         UpdateHealthBar();
+
+        if(_currentLives == 0)
+        {
+            OnPlayerDie?.Invoke();
+        }
     }
 }
