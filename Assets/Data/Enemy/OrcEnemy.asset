@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   maxHealth: 2
   damage: 10
+  scoreEarned: 1

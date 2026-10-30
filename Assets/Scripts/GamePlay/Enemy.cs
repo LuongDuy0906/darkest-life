@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     private float speed = 1.5f;
     private float _currentHealth;
 
+    public int ScoreEarned => data.scoreEarned;
+
     void Awake()
     {
         playerObject = FindAnyObjectByType<PlayerMovement>().transform;
