@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if(_isGameOver) return;
         _timeSurvive += Time.deltaTime;
     }
 
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("bestScore", _totalScore);
         }
 
-        PlayerPrefs.SetFloat("timeSurvice", _timeSurvive);
+        PlayerPrefs.SetFloat("timeSurvive", _timeSurvive);
         PlayerPrefs.Save();
     }
 

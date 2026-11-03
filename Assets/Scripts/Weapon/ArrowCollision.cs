@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class ArrowCollision : MonoBehaviour
 {
+    private ArrowPool _arrowPool;
+
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.TryGetComponent<Enemy>(out var enemy))
         {
-            Destroy(gameObject);
+            _arrowPool.RestorePool(gameObject);
             enemy.TakeDamage(1);
         }
+    }
+
+    public void Initialize(ArrowPool arrowPool)
+    {
+        _arrowPool = arrowPool;
     }
 }

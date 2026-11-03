@@ -1,9 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class WeaponShooting : MonoBehaviour
 {
-    [SerializeField] private GameObject arrowsPrefab;
+    private ArrowPool _arrowPool;
+
+    private void Start() {
+        _arrowPool = FindAnyObjectByType<ArrowPool>();
+    }
 
     private void Update()
     {
@@ -15,6 +20,6 @@ public class WeaponShooting : MonoBehaviour
 
     private void ShootArrow()
     {
-        Instantiate(arrowsPrefab, transform.position, transform.rotation);
+        _arrowPool.GetPool(transform.position, transform.rotation);
     }
 }
