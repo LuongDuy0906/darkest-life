@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -13,12 +14,14 @@ public class UIManager : MonoBehaviour
     {
         GameManager.OnScoreChanged += HandleScoreChanged;
         GameManager.OnGameOver += HandleGameOver;
+        PlayerExp.OnExpChanged += HandleExpChanged;
     }
 
     void OnDisable()
     {
         GameManager.OnScoreChanged -= HandleScoreChanged;
         GameManager.OnGameOver -= HandleGameOver;
+        PlayerExp.OnExpChanged -= HandleExpChanged;
     }
 
     private void UpdateGamePlayUI(int score)
@@ -34,5 +37,10 @@ public class UIManager : MonoBehaviour
     private void HandleGameOver(int totalScore, float timePlay)
     {
         gamePlayUI.UpdateGamePlayUI(totalScore, timePlay);
+    }
+
+    private void HandleExpChanged(float expPercent)
+    {
+        gamePlayUI.UpdateExpBar(expPercent);
     }
 }

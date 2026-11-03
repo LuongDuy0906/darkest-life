@@ -9,10 +9,15 @@ public class GamePlayUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _bestScoreText;
     [SerializeField] private TextMeshProUGUI _currentScoreText;
     [SerializeField] private TextMeshProUGUI _timePlayText;
+    [SerializeField] private Transform expBar;
+
+    private Vector3 _expBarOriginalScale;
 
     void Awake()
     {
         gameOverUI.SetActive(false);
+        _expBarOriginalScale = expBar.localScale;
+        expBar.localScale = new Vector3(0f, _expBarOriginalScale.y, _expBarOriginalScale.z);
     }
 
     public void UpdateScoreText(int score)
@@ -36,5 +41,12 @@ public class GamePlayUI : MonoBehaviour
         _currentScoreText.text = totalScore.ToString();
         UpdateTimeText(timePlay);
         _scoreText.gameObject.SetActive(false);
+    }
+
+    public void UpdateExpBar(float expPercent)
+    {
+        Vector3 scale = _expBarOriginalScale;
+        scale.x = _expBarOriginalScale.x * expPercent;
+        expBar.localScale = scale;
     }
 }

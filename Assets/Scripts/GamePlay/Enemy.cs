@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private float _currentHealth;
 
     public int ScoreEarned => data.scoreEarned;
+    public int ExpEarned => data.expEarned;
 
     void Awake()
     {
