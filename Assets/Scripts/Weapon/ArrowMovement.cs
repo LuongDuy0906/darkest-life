@@ -7,7 +7,7 @@ public class ArrowMovement : MonoBehaviour
     private ArrowPool _arrowPool;
     private Vector3 _startPosition;
 
-    void Start()
+    void OnEnable()
     {
         _startPosition = transform.position;
     }
