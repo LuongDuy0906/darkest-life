@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     public int ScoreEarned => data.scoreEarned;
     public int ExpEarned => data.expEarned;
+    public float Damage => data.damage;
     private float maxDistance = 20f;
 
     void Awake()
@@ -57,14 +58,6 @@ public class Enemy : MonoBehaviour
         if(_currentHealth == 0)
         {
             OnEnemyDestroy?.Invoke(gameObject);
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            OnEnemyDamage?.Invoke(data.damage);
         }
     }
 }

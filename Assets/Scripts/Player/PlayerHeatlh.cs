@@ -11,22 +11,25 @@ public class PlayerHeatlh : MonoBehaviour
     private float _maxLives = 100;
     private Vector3 _healthBarOriginalScale;
     private GameManager gameManager;
+    private bool _isTakeDamage = false;
+    private Animator animator;
 
     void Awake()
     {
         _healthBarOriginalScale = healthBar.localScale;
         _currentLives = _maxLives;
         gameManager = FindAnyObjectByType<GameManager>();
+        animator = GetComponent<Animator>();
     }
 
     void OnEnable()
     {
-        Enemy.OnEnemyDamage += HandleTakeDamage;
+        PlayerCollision.OnTakeDamage += HandleTakeDamage;
     }
 
     void OnDisable()
     {
-        Enemy.OnEnemyDamage -= HandleTakeDamage;
+        PlayerCollision.OnTakeDamage -= HandleTakeDamage;
     }
 
     private void UpdateHealthBar()
@@ -37,10 +40,10 @@ public class PlayerHeatlh : MonoBehaviour
         healthBar.localScale = scale;
     }
 
-    
     private void HandleTakeDamage(float damage)
     {
         if(gameManager.IsGameOver()) return;
+
         _currentLives -= damage;
         _currentLives = Mathf.Max(_currentLives, 0);
         UpdateHealthBar();
@@ -49,5 +52,11 @@ public class PlayerHeatlh : MonoBehaviour
         {
             OnPlayerDie?.Invoke();
         }
+    }
+
+    public void SetIsTakeDamage(bool isTakeDamage)
+    {
+        _isTakeDamage = isTakeDamage;
+        animator.SetBool("isHurt", isTakeDamage);
     }
 }
