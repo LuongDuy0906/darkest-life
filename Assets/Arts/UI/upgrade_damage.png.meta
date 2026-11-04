@@ -1,0 +1,240 @@
+fileFormatVersion: 2
+guid: bd80ee55f5a5bce44a1bfe9347d25157
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6946915203815560687
+    second: upgrade_damage_0
+  - first:
+      213: 8905578325532203793
+    second: upgrade_damage_1
+  - first:
+      213: -4306991226672713543
+    second: upgrade_damage_2
+  - first:
+      213: -5946145803047890646
+    second: upgrade_damage_3
+  - first:
+      213: 5634158765858385388
+    second: upgrade_damage_4
+  - first:
+      213: -7498447573033839983
+    second: upgrade_damage_5
+  - first:
+      213: 7205878501279515579
+    second: upgrade_damage_6
+  - first:
+      213: -225623838599678964
+    second: upgrade_damage_7
+  - first:
+      213: -773871240406869513
+    second: upgrade_damage_8
+  - first:
+      213: -1273424476639076854
+    second: upgrade_damage_9
+  - first:
+      213: -7082952562884866676
+    second: upgrade_damage_10
+  - first:
+      213: 6813586901788308113
+    second: upgrade_damage_11
+  - first:
+      213: 3693109539476938967
+    second: upgrade_damage_12
+  - first:
+      213: -2286770448535878079
+    second: upgrade_damage_13
+  - first:
+      213: -796716378436741212
+    second: upgrade_damage_14
+  - first:
+      213: 6955015513436855807
+    second: upgrade_damage_15
+  - first:
+      213: -7761951760679915037
+    second: upgrade_damage_16
+  - first:
+      213: -8501059905113788623
+    second: upgrade_damage_17
+  - first:
+      213: 7952699438668278782
+    second: upgrade_damage_18
+  - first:
+      213: 9125062453498757042
+    second: upgrade_damage_19
+  - first:
+      213: 299679693329285053
+    second: upgrade_damage_20
+  - first:
+      213: -1959843869626280633
+    second: upgrade_damage_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: upgrade_damage_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1254
+        height: 1254
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11a20dfad69979f90800000000000000
+      internalID: -6946915203815560687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c5bc76c337eafd341888c882ba2e9e8f
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      upgrade_damage_0: -6946915203815560687
+      upgrade_damage_1: 8905578325532203793
+      upgrade_damage_10: -7082952562884866676
+      upgrade_damage_11: 6813586901788308113
+      upgrade_damage_12: 3693109539476938967
+      upgrade_damage_13: -2286770448535878079
+      upgrade_damage_14: -796716378436741212
+      upgrade_damage_15: 6955015513436855807
+      upgrade_damage_16: -7761951760679915037
+      upgrade_damage_17: -8501059905113788623
+      upgrade_damage_18: 7952699438668278782
+      upgrade_damage_19: 9125062453498757042
+      upgrade_damage_2: -4306991226672713543
+      upgrade_damage_20: 299679693329285053
+      upgrade_damage_21: -1959843869626280633
+      upgrade_damage_3: -5946145803047890646
+      upgrade_damage_4: 5634158765858385388
+      upgrade_damage_5: -7498447573033839983
+      upgrade_damage_6: 7205878501279515579
+      upgrade_damage_7: -225623838599678964
+      upgrade_damage_8: -773871240406869513
+      upgrade_damage_9: -1273424476639076854
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

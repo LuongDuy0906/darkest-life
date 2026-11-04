@@ -10,6 +10,7 @@ public class GamePlayUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _currentScoreText;
     [SerializeField] private TextMeshProUGUI _timePlayText;
     [SerializeField] private Transform expBar;
+    [SerializeField] private GameObject upgradePanel;
 
     private Vector3 _expBarOriginalScale;
 
@@ -18,6 +19,7 @@ public class GamePlayUI : MonoBehaviour
         gameOverUI.SetActive(false);
         _expBarOriginalScale = expBar.localScale;
         expBar.localScale = new Vector3(0f, _expBarOriginalScale.y, _expBarOriginalScale.z);
+        upgradePanel.SetActive(false);
     }
 
     public void UpdateScoreText(int score)
@@ -48,5 +50,14 @@ public class GamePlayUI : MonoBehaviour
         Vector3 scale = _expBarOriginalScale;
         scale.x = _expBarOriginalScale.x * expPercent;
         expBar.localScale = scale;
+    }
+
+    public void ShowUpgradePanel()
+    {
+        upgradePanel.SetActive(true);
+
+        UpgradePanel panel = upgradePanel.GetComponent<UpgradePanel>();
+
+        panel.ShowUpgradeCard();
     }
 }

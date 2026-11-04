@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     {
         Enemy.OnEnemyDestroy += HandleEnemyDestroy;
         PlayerHeatlh.OnPlayerDie += HandlePlayerDie;
+        PlayerExp.OnLevelUp += HandleLevelUp;
     }
 
     void OnDisable()
     {
         Enemy.OnEnemyDestroy -= HandleEnemyDestroy;
         PlayerHeatlh.OnPlayerDie -= HandlePlayerDie;
+        PlayerExp.OnLevelUp -= HandleLevelUp;
     }
 
     void Update()
@@ -66,5 +68,10 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver()
     {
         return _isGameOver;
+    }
+
+    private void HandleLevelUp()
+    {
+        SetTimeScale(0);
     }
 }

@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnScoreChanged += HandleScoreChanged;
         GameManager.OnGameOver += HandleGameOver;
         PlayerExp.OnExpChanged += HandleExpChanged;
+        PlayerExp.OnLevelUp += HandleLevelUp;
     }
 
     void OnDisable()
@@ -22,6 +23,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnScoreChanged -= HandleScoreChanged;
         GameManager.OnGameOver -= HandleGameOver;
         PlayerExp.OnExpChanged -= HandleExpChanged;
+        PlayerExp.OnLevelUp += HandleLevelUp;
     }
 
     private void UpdateGamePlayUI(int score)
@@ -42,5 +44,10 @@ public class UIManager : MonoBehaviour
     private void HandleExpChanged(float expPercent)
     {
         gamePlayUI.UpdateExpBar(expPercent);
+    }
+
+    private void HandleLevelUp()
+    {
+        gamePlayUI.ShowUpgradePanel();
     }
 }
