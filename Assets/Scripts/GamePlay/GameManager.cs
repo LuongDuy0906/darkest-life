@@ -3,23 +3,23 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action<int> OnScoreChanged;
+    public static Action<int> OnLevelChanged;
     public static Action<int, float> OnGameOver;
 
-    private int _totalScore = 0;
     private bool _isGameOver = false;
+    private int _currentLevel;
     private float _timeSurvive = 0f;
+
+    public float TimeSurvived => _timeSurvive;
 
     void OnEnable()
     {
-        Enemy.OnEnemyDestroy += HandleEnemyDestroy;
         PlayerHeatlh.OnPlayerDie += HandlePlayerDie;
         PlayerExp.OnLevelUp += HandleLevelUp;
     }
 
     void OnDisable()
     {
-        Enemy.OnEnemyDestroy -= HandleEnemyDestroy;
         PlayerHeatlh.OnPlayerDie -= HandlePlayerDie;
         PlayerExp.OnLevelUp -= HandleLevelUp;
     }
@@ -30,22 +30,13 @@ public class GameManager : MonoBehaviour
         _timeSurvive += Time.deltaTime;
     }
 
-    private void HandleEnemyDestroy(GameObject enemy)
-    {
-        Enemy enemyDestroyed = enemy.GetComponent<Enemy>();
-
-        _totalScore += enemyDestroyed.ScoreEarned;
-
-        OnScoreChanged?.Invoke(_totalScore);
-    }
-
     private void StorePlayerStat()
     {
-        int bestScore = PlayerPrefs.GetInt("bestScore", 0);
+        int bestLevel = PlayerPrefs.GetInt("bestLevel", 0);
 
-        if(_totalScore >= bestScore)
+        if(_currentLevel >= bestLevel)
         {
-            PlayerPrefs.SetInt("bestScore", _totalScore);
+            PlayerPrefs.SetInt("bestLevel", _currentLevel);
         }
 
         PlayerPrefs.SetFloat("timeSurvive", _timeSurvive);
@@ -62,7 +53,7 @@ public class GameManager : MonoBehaviour
         _isGameOver = true;
         SetTimeScale(0);
         StorePlayerStat();
-        OnGameOver?.Invoke(_totalScore, _timeSurvive);
+        OnGameOver?.Invoke(_currentLevel, _timeSurvive);
     }   
 
     public bool IsGameOver()
@@ -70,8 +61,10 @@ public class GameManager : MonoBehaviour
         return _isGameOver;
     }
 
-    private void HandleLevelUp()
+    private void HandleLevelUp(int level)
     {
         SetTimeScale(0);
+        _currentLevel = level;
+        OnLevelChanged?.Invoke(level);
     }
 }

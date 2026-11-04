@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,12 +6,15 @@ public class GamePlayUI : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverUI;
 
-    [SerializeField] private TextMeshProUGUI _scoreText;
-    [SerializeField] private TextMeshProUGUI _bestScoreText;
-    [SerializeField] private TextMeshProUGUI _currentScoreText;
-    [SerializeField] private TextMeshProUGUI _timePlayText;
+    [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private TextMeshProUGUI timeSurvivedText;
+    [SerializeField] private TextMeshProUGUI bestLevelText;
+    [SerializeField] private TextMeshProUGUI currentLevelText;
+    [SerializeField] private TextMeshProUGUI timePlayText;
     [SerializeField] private Transform expBar;
     [SerializeField] private GameObject upgradePanel;
+
+    private int lastDisplayedSecond = -1;
 
     private Vector3 _expBarOriginalScale;
 
@@ -22,27 +26,37 @@ public class GamePlayUI : MonoBehaviour
         upgradePanel.SetActive(false);
     }
 
-    public void UpdateScoreText(int score)
+    public void UpdateLevelText(int level)
     {
-        _scoreText.text = score.ToString();
+        levelText.text = level.ToString();
+    }
+
+    private string StandardizeDisplayTime(float time)
+    {
+        int minutes = Mathf.FloorToInt(time / 60f);
+        int seconds = Mathf.FloorToInt(time % 60f);
+        return $"{minutes}:{seconds}";
+    }
+
+    public void UpdateTimePlayText(float timePlay)
+    {
+        timeSurvivedText.text = StandardizeDisplayTime(timePlay);
     }
 
     private void UpdateTimeText(float time)
     {
-        int minutes = Mathf.FloorToInt(time / 60f);
-        int seconds = Mathf.FloorToInt(time % 60f);
-        _timePlayText.text = $"{minutes}:{seconds}";
+        timePlayText.text = StandardizeDisplayTime(time);
     }
 
     public void UpdateGamePlayUI(int totalScore, float timePlay)
     {
-        int bestScore = PlayerPrefs.GetInt("bestScore");
+        int bestScore = PlayerPrefs.GetInt("bestLevel");
 
         gameOverUI.SetActive(true);
-        _bestScoreText.text = bestScore.ToString();
-        _currentScoreText.text = totalScore.ToString();
+        bestLevelText.text = bestScore.ToString();
+        currentLevelText.text = totalScore.ToString();
         UpdateTimeText(timePlay);
-        _scoreText.gameObject.SetActive(false);
+        levelText.gameObject.SetActive(false);
     }
 
     public void UpdateExpBar(float expPercent)

@@ -4,15 +4,18 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     private GamePlayUI gamePlayUI;
+    private GameManager gameManager;
+    private int lastDisplayedSecond = -1;
 
     void Awake()
     {
         gamePlayUI = FindAnyObjectByType<GamePlayUI>();
+        gameManager = FindAnyObjectByType<GameManager>();
     }
 
     void OnEnable()
     {
-        GameManager.OnScoreChanged += HandleScoreChanged;
+        GameManager.OnLevelChanged += HandleLevelChanged;
         GameManager.OnGameOver += HandleGameOver;
         PlayerExp.OnExpChanged += HandleExpChanged;
         PlayerExp.OnLevelUp += HandleLevelUp;
@@ -20,20 +23,15 @@ public class UIManager : MonoBehaviour
 
     void OnDisable()
     {
-        GameManager.OnScoreChanged -= HandleScoreChanged;
+        GameManager.OnLevelChanged -= HandleLevelChanged;
         GameManager.OnGameOver -= HandleGameOver;
         PlayerExp.OnExpChanged -= HandleExpChanged;
         PlayerExp.OnLevelUp += HandleLevelUp;
     }
 
-    private void UpdateGamePlayUI(int score)
+    void Update()
     {
-        gamePlayUI.UpdateScoreText(score);
-    }
-
-    private void HandleScoreChanged(int score)
-    {
-        UpdateGamePlayUI(score);
+        HandleUpdateTimePlay();
     }
 
     private void HandleGameOver(int totalScore, float timePlay)
@@ -46,8 +44,22 @@ public class UIManager : MonoBehaviour
         gamePlayUI.UpdateExpBar(expPercent);
     }
 
-    private void HandleLevelUp()
+    private void HandleLevelUp(int level)
     {
         gamePlayUI.ShowUpgradePanel();
+    }
+
+    private void HandleLevelChanged(int level)
+    {
+        gamePlayUI.UpdateLevelText(level);
+    }
+
+    private void HandleUpdateTimePlay()
+    {
+        int second = Mathf.FloorToInt(gameManager.TimeSurvived);
+        if (second == lastDisplayedSecond) return;
+
+        lastDisplayedSecond = second;
+        gamePlayUI.UpdateTimePlayText(second);
     }
 }

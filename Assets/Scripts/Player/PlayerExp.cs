@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerExp : MonoBehaviour
 {
     public static event Action<float> OnExpChanged;
-    public static event Action OnLevelUp;
+    public static event Action<int> OnLevelUp;
 
     private float _currentExp;
     private float _maxExp;
@@ -40,7 +40,7 @@ public class PlayerExp : MonoBehaviour
         {
             _currentExp -= _maxExp;
             _currentLevel += 1;
-            OnLevelUp?.Invoke();
+            OnLevelUp?.Invoke(_currentLevel);
             _maxExp = RequiredExp(_currentLevel);
         }
 

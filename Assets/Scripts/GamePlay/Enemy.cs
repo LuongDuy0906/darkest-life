@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer enemyRender;
     private float speed = 1.5f;
     private float _currentHealth;
-
-    public int ScoreEarned => data.scoreEarned;
     public int ExpEarned => data.expEarned;
     public float Damage => data.damage;
     private float maxDistance = 20f;
