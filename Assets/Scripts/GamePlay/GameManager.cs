@@ -62,4 +62,9 @@ public class GameManager : MonoBehaviour
         StorePlayerStat();
         OnGameOver?.Invoke(_totalScore, _timeSurvive);
     }   
+
+    public bool IsGameOver()
+    {
+        return _isGameOver;
+    }
 }

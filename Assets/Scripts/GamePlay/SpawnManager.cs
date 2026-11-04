@@ -19,11 +19,13 @@ public class SpawnManager : MonoBehaviour
     void OnEnable()
     {
         Enemy.OnEnemyDestroy += HandleEnemyDestroy;
+        Enemy.OnEnemyDisappear += HandleEnemyDestroy;
     }
 
     void OnDisable()
     {
         Enemy.OnEnemyDestroy -= HandleEnemyDestroy;
+        Enemy.OnEnemyDisappear -= HandleEnemyDestroy;
     }
 
     void Update()

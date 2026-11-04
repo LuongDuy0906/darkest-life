@@ -4,6 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {   
     public static Action<GameObject> OnEnemyDestroy;
+    public static Action<GameObject> OnEnemyDisappear;
     public static Action<float> OnEnemyDamage;
 
     [SerializeField] private EnemyData data;
@@ -15,12 +16,17 @@ public class Enemy : MonoBehaviour
 
     public int ScoreEarned => data.scoreEarned;
     public int ExpEarned => data.expEarned;
+    private float maxDistance = 20f;
 
     void Awake()
     {
         playerObject = FindAnyObjectByType<PlayerMovement>().transform;
-        enemyRender = GetComponent<SpriteRenderer>();   
-        _currentHealth = data.maxHealth;     
+        enemyRender = GetComponent<SpriteRenderer>();       
+    }
+
+    void OnEnable()
+    {
+        _currentHealth = data.maxHealth; 
     }
 
     // Update is called once per frame
@@ -37,6 +43,11 @@ public class Enemy : MonoBehaviour
             enemyRender.flipX = deltaX < 0f;
 
         transform.position = Vector2.MoveTowards(transform.position, playerObject.position, speed * Time.deltaTime);
+
+        if(Vector3.Distance(playerObject.transform.position, transform.position) >= maxDistance)
+        {
+            OnEnemyDisappear?.Invoke(gameObject);
+        }
     }
     
     public void TakeDamage(int damage)

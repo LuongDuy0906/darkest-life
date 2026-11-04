@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        float _moveX = moveInput.action.ReadValue<Vector2>().x;
-        float _moveY = moveInput.action.ReadValue<Vector2>().y;
+        _moveX = moveInput.action.ReadValue<Vector2>().x;
+        _moveY = moveInput.action.ReadValue<Vector2>().y;
  
         rb.linearVelocity = new Vector2(speed * _moveX, rb.linearVelocity.y);
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed * _moveY);
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        bool isWalk = Mathf.Abs(rb.linearVelocity.x) > 0.1f;
+        bool isWalk = Mathf.Abs(rb.linearVelocity.x) > 0.1f || Mathf.Abs(rb.linearVelocity.y) > 0.1f;
 
         animator.SetBool("isWalk", isWalk);
     }

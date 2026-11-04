@@ -34,16 +34,17 @@ public class PlayerExp : MonoBehaviour
     private void EarnedExp(int expEarned)
     {
         _currentExp += expEarned;
-        float expPercent = _currentExp / _maxExp;
 
-        OnExpChanged?.Invoke(expPercent);
-
-        if(_currentExp >= _maxExp)
+        while(_currentExp >= _maxExp)
         {
             _currentExp -= _maxExp;
             _currentLevel += 1;
             _maxExp = RequiredExp(_currentLevel);
         }
+
+        float expPercent = _currentExp / _maxExp;
+
+        OnExpChanged?.Invoke(expPercent);
     }
 
     private void HandleEnemyDestroy(GameObject enemy)
