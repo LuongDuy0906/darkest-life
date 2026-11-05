@@ -15,7 +15,6 @@ public class UIManager : MonoBehaviour
 
     void OnEnable()
     {
-        GameManager.OnLevelChanged += HandleLevelChanged;
         GameManager.OnGameOver += HandleGameOver;
         PlayerExp.OnExpChanged += HandleExpChanged;
         PlayerExp.OnLevelUp += HandleLevelUp;
@@ -23,7 +22,6 @@ public class UIManager : MonoBehaviour
 
     void OnDisable()
     {
-        GameManager.OnLevelChanged -= HandleLevelChanged;
         GameManager.OnGameOver -= HandleGameOver;
         PlayerExp.OnExpChanged -= HandleExpChanged;
         PlayerExp.OnLevelUp -= HandleLevelUp;
@@ -46,12 +44,8 @@ public class UIManager : MonoBehaviour
 
     private void HandleLevelUp(int level)
     {
-        gamePlayUI.ShowUpgradePanel();
-    }
-
-    private void HandleLevelChanged(int level)
-    {
         gamePlayUI.UpdateLevelText(level);
+        gamePlayUI.ShowUpgradePanel();
     }
 
     private void HandleUpdateTimePlay()

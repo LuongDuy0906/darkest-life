@@ -20,13 +20,7 @@ public class UpgradePanel : MonoBehaviour
 
     void OnEnable()
     {
-        UpgradeCard.OnCardClicked += HandleCardClick;
         ShowUpgradeCard();
-    }
-
-    void OnDisable()
-    {
-        UpgradeCard.OnCardClicked -= HandleCardClick;
     }
 
     public void ShowUpgradeCard()
@@ -43,6 +37,7 @@ public class UpgradePanel : MonoBehaviour
             GameObject cardGameObject = Instantiate(upgradeCardPrefab, cardsContainer);
             UpgradeCard card = cardGameObject.GetComponent<UpgradeCard>();
             card.Initialize(data);
+            card.OnCardClicked += HandleCardClick;
             activeCards.Add(cardGameObject);
         }
     }

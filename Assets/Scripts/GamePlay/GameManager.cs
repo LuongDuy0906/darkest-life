@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action<int> OnLevelChanged;
     public static Action<int, float> OnGameOver;
 
     private bool _isGameOver = false;
@@ -65,7 +64,6 @@ public class GameManager : MonoBehaviour
     {
         SetTimeScale(0);
         _currentLevel = level;
-        OnLevelChanged?.Invoke(level);
     }
 
     public void ResumeGame()
