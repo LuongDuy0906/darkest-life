@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour
     public int ExpEarned => data.expEarned;
     public float Damage => data.damage;
     private float maxDistance = 20f;
+    private Rigidbody2D rb;
 
     void Awake()
     {
         playerObject = FindAnyObjectByType<PlayerMovement>().transform;
-        enemyRender = GetComponent<SpriteRenderer>();       
+        enemyRender = GetComponent<SpriteRenderer>();     
+        rb = GetComponent<Rigidbody2D>();  
     }
 
     void OnEnable()
@@ -28,20 +30,24 @@ public class Enemy : MonoBehaviour
         _currentHealth = data.maxHealth; 
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         EnemyMovement();
     }
 
     private void EnemyMovement()
     {
-        float deltaX = playerObject.position.x - transform.position.x;
+        Vector2 nextPosition = Vector2.MoveTowards(
+            rb.position,
+            playerObject.position,
+            speed * Time.fixedDeltaTime
+        );
 
+        rb.MovePosition(nextPosition);
+
+        float deltaX = playerObject.position.x - rb.position.x;
         if (Mathf.Abs(deltaX) > 0.01f)
             enemyRender.flipX = deltaX < 0f;
-
-        transform.position = Vector2.MoveTowards(transform.position, playerObject.position, speed * Time.deltaTime);
 
         if(Vector3.Distance(playerObject.transform.position, transform.position) >= maxDistance)
         {
