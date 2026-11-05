@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnGameOver += HandleGameOver;
         PlayerExp.OnExpChanged += HandleExpChanged;
         PlayerExp.OnLevelUp += HandleLevelUp;
+        GameManager.OnStillLevelingUp += HandleStillLevelingUp;
     }
 
     void OnDisable()
@@ -26,6 +28,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnGameOver -= HandleGameOver;
         PlayerExp.OnExpChanged -= HandleExpChanged;
         PlayerExp.OnLevelUp -= HandleLevelUp;
+        GameManager.OnStillLevelingUp -= HandleStillLevelingUp;
     }
 
     void Update()
@@ -67,5 +70,16 @@ public class UIManager : MonoBehaviour
     {
         gameManager.TogglePauseMenu();
         gamePlayUI.ShowPausePanel(gameManager.GetGameState() == GameState.Paused);
+    }
+
+    public IEnumerator ShowNextUpgradePanel()
+    {
+        yield return new WaitForSecondsRealtime(0.3f);
+        gamePlayUI.ShowUpgradePanel();
+    }
+
+    private void HandleStillLevelingUp()
+    {
+        StartCoroutine(ShowNextUpgradePanel());
     }
 }

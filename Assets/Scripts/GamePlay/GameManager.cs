@@ -13,15 +13,18 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static Action<int, float> OnGameOver;
+    public static Action OnStillLevelingUp;
 
     private int _currentLevel = 1;
     private float _timeSurvive = 0f;
     public float TimeSurvived => _timeSurvive;
     private GameState _currentState;
+    private int _pendingUpdateChoice;
 
     void Awake()
     {
        SetGameState(GameState.Playing);
+       _pendingUpdateChoice = 0;
     }
 
     void OnEnable()
@@ -68,13 +71,24 @@ public class GameManager : MonoBehaviour
     }   
 
     private void HandleLevelUp(int level)
-    {
+    {   
         SetGameState(GameState.LevelUp);
         _currentLevel = level;
+        _pendingUpdateChoice += 1;
     }
 
     public void FinishedLevelUp()
     {
+         if (_pendingUpdateChoice <= 0) return;
+
+        _pendingUpdateChoice--;
+
+        if (_pendingUpdateChoice > 0)
+        {
+            OnStillLevelingUp?.Invoke();
+            return;
+        }
+
         SetGameState(GameState.Playing);
     }
 

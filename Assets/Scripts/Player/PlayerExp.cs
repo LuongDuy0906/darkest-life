@@ -40,8 +40,8 @@ public class PlayerExp : MonoBehaviour
         {
             _currentExp -= _maxExp;
             _currentLevel += 1;
-            OnLevelUp?.Invoke(_currentLevel);
             _maxExp = RequiredExp(_currentLevel);
+            OnLevelUp?.Invoke(_currentLevel);
         }
 
         float expPercent = _currentExp / _maxExp;
