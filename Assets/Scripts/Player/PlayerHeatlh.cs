@@ -46,18 +46,13 @@ public class PlayerHeatlh : MonoBehaviour
 
         _currentLives -= damage;
         _currentLives = Mathf.Max(_currentLives, 0);
+        animator.SetTrigger("Hurt");
         UpdateHealthBar();
 
         if(_currentLives == 0)
         {
             OnPlayerDie?.Invoke();
         }
-    }
-
-    public void SetIsTakeDamage(bool isTakeDamage)
-    {
-        _isTakeDamage = isTakeDamage;
-        animator.SetBool("isHurt", _isTakeDamage);
     }
 
     public void UpgradePlayerHealth(float health)
