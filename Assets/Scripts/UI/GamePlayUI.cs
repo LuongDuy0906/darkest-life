@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GamePlayUI : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GamePlayUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timePlayText;
     [SerializeField] private Transform expBar;
     [SerializeField] private GameObject upgradePanel;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pauseButton;
 
     private int lastDisplayedSecond = -1;
 
@@ -20,10 +23,14 @@ public class GamePlayUI : MonoBehaviour
 
     void Awake()
     {
+        levelText.gameObject.SetActive(true);
+        expBar.gameObject.SetActive(true);
+        pauseButton.SetActive(true);
         gameOverUI.SetActive(false);
         _expBarOriginalScale = expBar.localScale;
         expBar.localScale = new Vector3(0f, _expBarOriginalScale.y, _expBarOriginalScale.z);
         upgradePanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     public void UpdateLevelText(int level)
@@ -52,6 +59,9 @@ public class GamePlayUI : MonoBehaviour
     {
         int bestScore = PlayerPrefs.GetInt("bestLevel");
 
+        levelText.gameObject.SetActive(false);
+        expBar.gameObject.SetActive(false);
+        pauseButton.SetActive(false);
         gameOverUI.SetActive(true);
         bestLevelText.text = bestScore.ToString();
         currentLevelText.text = totalScore.ToString();
@@ -74,5 +84,10 @@ public class GamePlayUI : MonoBehaviour
     public void HideUpgradePanel()
     {
         upgradePanel.SetActive(false);
+    }
+
+    public void ShowPausePanel(bool isGamePause)
+    {
+        pausePanel.SetActive(isGamePause);
     }
 }

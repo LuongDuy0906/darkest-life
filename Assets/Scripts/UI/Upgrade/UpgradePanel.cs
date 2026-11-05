@@ -46,6 +46,6 @@ public class UpgradePanel : MonoBehaviour
     {
         _upgradeManager.HandleUpgrade(data);
         gameObject.SetActive(false);
-        _gameManager.ResumeGame();
+        _gameManager.FinishedLevelUp();
     }
 }

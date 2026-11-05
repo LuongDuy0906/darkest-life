@@ -11,7 +11,7 @@ public class PlayerHeatlh : MonoBehaviour
     private float _maxLives = 100;
     private Vector3 _healthBarOriginalScale;
     private GameManager gameManager;
-    private bool _isTakeDamage = false;
+    private bool _isTakeDamage;
     private Animator animator;
 
     void Awake()
@@ -42,7 +42,7 @@ public class PlayerHeatlh : MonoBehaviour
 
     private void HandleTakeDamage(float damage)
     {
-        if(gameManager.IsGameOver()) return;
+        if(gameManager.GetGameState() != GameState.Playing) return;
 
         _currentLives -= damage;
         _currentLives = Mathf.Max(_currentLives, 0);
@@ -57,7 +57,7 @@ public class PlayerHeatlh : MonoBehaviour
     public void SetIsTakeDamage(bool isTakeDamage)
     {
         _isTakeDamage = isTakeDamage;
-        animator.SetBool("isHurt", isTakeDamage);
+        animator.SetBool("isHurt", _isTakeDamage);
     }
 
     public void UpgradePlayerHealth(float health)

@@ -1,15 +1,22 @@
 using System;
 using UnityEngine;
 
+public enum GameState
+{
+    Playing,
+    Paused,
+    LevelUp,
+    GameOver
+}
+
 public class GameManager : MonoBehaviour
 {
     public static Action<int, float> OnGameOver;
 
-    private bool _isGameOver = false;
-    private int _currentLevel;
+    private int _currentLevel = 1;
     private float _timeSurvive = 0f;
-
     public float TimeSurvived => _timeSurvive;
+    private GameState _currentState = GameState.Playing;
 
     void OnEnable()
     {
@@ -25,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {   
-        if(_isGameOver) return;
+        if(_currentState != GameState.Playing) return;
         _timeSurvive += Time.deltaTime;
     }
 
@@ -49,25 +56,41 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerDie()
     {
-        _isGameOver = true;
-        SetTimeScale(0);
+        SetGameState(GameState.GameOver);
         StorePlayerStat();
         OnGameOver?.Invoke(_currentLevel, _timeSurvive);
     }   
 
-    public bool IsGameOver()
-    {
-        return _isGameOver;
-    }
-
     private void HandleLevelUp(int level)
     {
-        SetTimeScale(0);
+        SetGameState(GameState.LevelUp);
         _currentLevel = level;
     }
 
-    public void ResumeGame()
+    public void FinishedLevelUp()
     {
-        SetTimeScale(1);
+        SetGameState(GameState.Playing);
+    }
+
+    public void TogglePauseMenu()
+    {   
+        if(_currentState == GameState.Paused)
+        {
+            SetGameState(GameState.Playing);
+        } else if(_currentState == GameState.Playing)
+        {
+            SetGameState(GameState.Paused);
+        }
+    }
+
+    public void SetGameState(GameState state)
+    {
+        _currentState = state;
+        SetTimeScale(state == GameState.Playing ? 1 : 0);
+    }
+
+    public GameState GetGameState()
+    {
+        return _currentState;
     }
 }

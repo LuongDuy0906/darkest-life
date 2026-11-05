@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         HandleUpdateTimePlay();
+
+        if(Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            PauseGame();
+        }
     }
 
     private void HandleGameOver(int totalScore, float timePlay)
@@ -55,5 +61,11 @@ public class UIManager : MonoBehaviour
 
         lastDisplayedSecond = second;
         gamePlayUI.UpdateTimePlayText(second);
+    }
+
+    public void PauseGame()
+    {
+        gameManager.TogglePauseMenu();
+        gamePlayUI.ShowPausePanel(gameManager.GetGameState() == GameState.Paused);
     }
 }

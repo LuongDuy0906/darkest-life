@@ -14,7 +14,7 @@ public class WeaponShooting : MonoBehaviour
 
     private void Update()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame && !gameManager.IsGameOver())
+        if(Mouse.current.leftButton.wasPressedThisFrame && gameManager.GetGameState() == GameState.Playing)
         {
             ShootArrow();
         }
@@ -22,6 +22,7 @@ public class WeaponShooting : MonoBehaviour
 
     private void ShootArrow()
     {
+        if(gameManager.GetGameState() != GameState.Playing) return;
         _arrowPool.GetPool(transform.position, transform.rotation);
     }
 }
