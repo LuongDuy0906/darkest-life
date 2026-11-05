@@ -9,6 +9,26 @@ public class UpgradePanel : MonoBehaviour
 
     private List<GameObject> activeCards = new List<GameObject>();
 
+    private UpgradeManager _upgradeManager;
+    private GameManager _gameManager;
+
+    void Awake()
+    {
+        _upgradeManager = FindAnyObjectByType<UpgradeManager>();
+        _gameManager = FindAnyObjectByType<GameManager>();
+    }
+
+    void OnEnable()
+    {
+        UpgradeCard.OnCardClicked += HandleCardClick;
+        ShowUpgradeCard();
+    }
+
+    void OnDisable()
+    {
+        UpgradeCard.OnCardClicked -= HandleCardClick;
+    }
+
     public void ShowUpgradeCard()
     {
         foreach(var card in activeCards)
@@ -25,5 +45,12 @@ public class UpgradePanel : MonoBehaviour
             card.Initialize(data);
             activeCards.Add(cardGameObject);
         }
+    }
+
+    private void HandleCardClick(UpgradeData data)
+    {
+        _upgradeManager.HandleUpgrade(data);
+        gameObject.SetActive(false);
+        _gameManager.ResumeGame();
     }
 }

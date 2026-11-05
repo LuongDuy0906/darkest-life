@@ -8,6 +8,9 @@ public class ArrowPool : MonoBehaviour
 
     private Queue<GameObject> available = new();
 
+    public float ArrowDamage = 1f;
+    public float ArrowSpeed = 5f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,5 +45,15 @@ public class ArrowPool : MonoBehaviour
     {
         arrow.SetActive(false);
         available.Enqueue(arrow);
+    }
+
+    public void UpdateArrowSpeed(float speed)
+    {
+        ArrowSpeed *= speed;
+    }
+
+    public void UpgradeArrowDamage(float damage)
+    {
+        ArrowDamage *= damage;
     }
 }

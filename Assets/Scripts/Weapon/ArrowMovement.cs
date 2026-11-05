@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ArrowMovement : MonoBehaviour
 {
-    private float speed = 5f;
     private float _maxDistance = 12f;
     private ArrowPool _arrowPool;
     private Vector3 _startPosition;
@@ -16,7 +15,7 @@ public class ArrowMovement : MonoBehaviour
     void OnEnable()
     {
         _startPosition = transform.position;
-        rb.linearVelocity = transform.right * speed;
+        rb.linearVelocity = transform.right * _arrowPool.ArrowSpeed;
     }
 
     // Update is called once per frame

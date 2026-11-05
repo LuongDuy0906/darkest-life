@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         }
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         _currentHealth = Mathf.Max(0, _currentHealth - damage);
 

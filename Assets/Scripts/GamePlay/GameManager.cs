@@ -67,4 +67,9 @@ public class GameManager : MonoBehaviour
         _currentLevel = level;
         OnLevelChanged?.Invoke(level);
     }
+
+    public void ResumeGame()
+    {
+        SetTimeScale(1);
+    }
 }

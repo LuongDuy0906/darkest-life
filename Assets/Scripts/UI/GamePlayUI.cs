@@ -69,9 +69,10 @@ public class GamePlayUI : MonoBehaviour
     public void ShowUpgradePanel()
     {
         upgradePanel.SetActive(true);
+    }
 
-        UpgradePanel panel = upgradePanel.GetComponent<UpgradePanel>();
-
-        panel.ShowUpgradeCard();
+    public void HideUpgradePanel()
+    {
+        upgradePanel.SetActive(false);
     }
 }

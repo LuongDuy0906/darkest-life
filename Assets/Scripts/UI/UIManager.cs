@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
         GameManager.OnLevelChanged -= HandleLevelChanged;
         GameManager.OnGameOver -= HandleGameOver;
         PlayerExp.OnExpChanged -= HandleExpChanged;
-        PlayerExp.OnLevelUp += HandleLevelUp;
+        PlayerExp.OnLevelUp -= HandleLevelUp;
     }
 
     void Update()

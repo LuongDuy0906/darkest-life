@@ -59,4 +59,19 @@ public class PlayerHeatlh : MonoBehaviour
         _isTakeDamage = isTakeDamage;
         animator.SetBool("isHurt", isTakeDamage);
     }
+
+    public void UpgradePlayerHealth(float health)
+    {
+        if (_currentLives >= _maxLives)
+        {
+            _maxLives += health;
+            _currentLives = _maxLives;
+        }
+        else
+        {
+            _currentLives = Mathf.Min(_currentLives + health, _maxLives);
+        }
+
+        UpdateHealthBar();
+    }
 }

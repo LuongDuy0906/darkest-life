@@ -8,7 +8,7 @@ public class ArrowCollision : MonoBehaviour
         if(other.gameObject.TryGetComponent<Enemy>(out var enemy))
         {
             _arrowPool.RestorePool(gameObject);
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(_arrowPool.ArrowDamage);
         }
     }
 
