@@ -8,12 +8,14 @@ public class SpawnManager : MonoBehaviour
     private Transform playerPosition;
     private float delaySpawnTime;
     private float defaultDelaySpawnTime = 1f;
+    private GameManager _gameManager;
 
     void Awake()
     {
         orcPool = GetComponentInChildren<ObjectPooler>();
         playerPosition = FindAnyObjectByType<PlayerMovement>().transform;
         delaySpawnTime = defaultDelaySpawnTime;
+        _gameManager = FindAnyObjectByType<GameManager>();
     }
 
     void OnEnable()
@@ -30,18 +32,18 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
+        if(_gameManager.GetGameState() != GameState.Playing) return;
         SpawnEnemy();
     }
 
     private void SpawnEnemy()
     {
-        Vector3 ramdonSpawnPosition = RandomSpawnPosition();
-
         if(delaySpawnTime > 0f)
         {
             delaySpawnTime -= Time.deltaTime;
         } else
         {
+            Vector3 ramdonSpawnPosition = RandomSpawnPosition();
             orcPool.GetPool(ramdonSpawnPosition);
             delaySpawnTime = defaultDelaySpawnTime;
         }

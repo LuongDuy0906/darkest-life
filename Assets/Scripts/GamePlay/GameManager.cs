@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -16,7 +17,12 @@ public class GameManager : MonoBehaviour
     private int _currentLevel = 1;
     private float _timeSurvive = 0f;
     public float TimeSurvived => _timeSurvive;
-    private GameState _currentState = GameState.Playing;
+    private GameState _currentState;
+
+    void Awake()
+    {
+       SetGameState(GameState.Playing);
+    }
 
     void OnEnable()
     {
@@ -92,5 +98,15 @@ public class GameManager : MonoBehaviour
     public GameState GetGameState()
     {
         return _currentState;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

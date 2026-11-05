@@ -20,16 +20,14 @@ public class ObjectPooler : MonoBehaviour
 
     public GameObject GetPool(Vector3 spawnPosition)
     {
-        if (available.Count == 0) {
-            GameObject newEnemy = Instantiate(enemyPrefab, transform);
-            newEnemy.SetActive(false);
-            available.Enqueue(newEnemy);
+        if (available.Count != 0) {
+            GameObject enemy = available.Dequeue();
+            enemy.transform.position = spawnPosition;
+            enemy.SetActive(true);
+            return enemy;
         }
 
-        GameObject enemy = available.Dequeue();
-        enemy.transform.position = spawnPosition;
-        enemy.SetActive(true);
-        return enemy;
+        return null;
     }
 
     public void RestorePool(GameObject enemy)
