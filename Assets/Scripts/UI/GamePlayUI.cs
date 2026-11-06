@@ -16,6 +16,7 @@ public class GamePlayUI : MonoBehaviour
     [SerializeField] private GameObject upgradePanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private GameObject pauseButton;
+    [SerializeField] private TextMeshProUGUI arrowsText;
 
     private int lastDisplayedSecond = -1;
 
@@ -89,5 +90,10 @@ public class GamePlayUI : MonoBehaviour
     public void ShowPausePanel(bool isGamePause)
     {
         pausePanel.SetActive(isGamePause);
+    }
+
+    public void ChangeArrowText(int arrows)
+    {
+        arrowsText.text = arrows.ToString();
     }
 }

@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
         PlayerExp.OnExpChanged += HandleExpChanged;
         PlayerExp.OnLevelUp += HandleLevelUp;
         GameManager.OnStillLevelingUp += HandleStillLevelingUp;
+        ArrowPool.OnArrowsChanged += HandleArrowsChanged;
     }
 
     void OnDisable()
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
         PlayerExp.OnExpChanged -= HandleExpChanged;
         PlayerExp.OnLevelUp -= HandleLevelUp;
         GameManager.OnStillLevelingUp -= HandleStillLevelingUp;
+        ArrowPool.OnArrowsChanged -= HandleArrowsChanged;
     }
 
     void Update()
@@ -82,5 +84,10 @@ public class UIManager : MonoBehaviour
     private void HandleStillLevelingUp()
     {
         StartCoroutine(ShowNextUpgradePanel());
+    }
+
+    private void HandleArrowsChanged(int arrows)
+    {
+        gamePlayUI.ChangeArrowText(arrows);
     }
 }
