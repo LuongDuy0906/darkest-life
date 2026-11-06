@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleLevelUp(int level)
     {   
+        if(_currentState == GameState.GameOver || _currentState == GameState.Paused) return;
         SetGameState(GameState.LevelUp);
         _currentLevel = level;
         _pendingUpdateChoice += 1;
@@ -80,17 +81,23 @@ public class GameManager : MonoBehaviour
 
     public void FinishedLevelUp()
     {
-         if (_pendingUpdateChoice <= 0) return;
-
-        _pendingUpdateChoice--;
-
-        if (_pendingUpdateChoice > 0)
+        if(_currentState == GameState.LevelUp)
         {
-            OnStillLevelingUp?.Invoke();
+            if (_pendingUpdateChoice <= 0) return;
+
+            _pendingUpdateChoice--;
+
+            if (_pendingUpdateChoice > 0)
+            {
+                OnStillLevelingUp?.Invoke();
+                return;
+            }
+
+            SetGameState(GameState.Playing);
+        } else
+        {
             return;
         }
-
-        SetGameState(GameState.Playing);
     }
 
     public void TogglePauseMenu()

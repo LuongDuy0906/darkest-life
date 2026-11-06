@@ -52,7 +52,8 @@ public class UIManager : MonoBehaviour
     }
 
     private void HandleLevelUp(int level)
-    {
+    {   
+        if(gameManager.GetGameState() == GameState.GameOver || gameManager.GetGameState() == GameState.Paused) return;
         gamePlayUI.UpdateLevelText(level);
         gamePlayUI.ShowUpgradePanel();
     }

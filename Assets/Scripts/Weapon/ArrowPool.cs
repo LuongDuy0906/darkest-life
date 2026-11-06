@@ -43,6 +43,8 @@ public class ArrowPool : MonoBehaviour
 
     public void RestorePool(GameObject arrow)
     {
+        if (!arrow.activeSelf) return;
+        
         arrow.SetActive(false);
         available.Enqueue(arrow);
     }
