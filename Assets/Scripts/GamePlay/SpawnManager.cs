@@ -5,6 +5,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private ObjectPooler orcPool;
     [SerializeField] private ObjectPooler bloodMonsterPool;
+    [SerializeField] private ObjectPooler demonPool;
 
     private float minDistance = 8f;
     private float maxDistance = 12f;
@@ -46,6 +47,11 @@ public class SpawnManager : MonoBehaviour
         if((_gameManager.CurrentLevel >= 5 || _gameManager.TimeSurvived >= 60f) && !poolToSpawn.Contains(bloodMonsterPool))
         {
             poolToSpawn.Add(bloodMonsterPool);
+        }
+
+        if((_gameManager.CurrentLevel >= 10 || _gameManager.TimeSurvived >= 120f) && !poolToSpawn.Contains(demonPool))
+        {
+            poolToSpawn.Add(demonPool);
         }
 
         if(delaySpawnTime > 0f)
