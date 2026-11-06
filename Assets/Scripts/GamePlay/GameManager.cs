@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private int _currentLevel = 1;
     private float _timeSurvive = 0f;
     public float TimeSurvived => _timeSurvive;
+    public float CurrentLevel => _currentLevel;
     private GameState _currentState;
     private int _pendingUpdateChoice;
 

@@ -753,6 +753,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 82083778}
+  - {fileID: 1133079418}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &234642166
@@ -767,6 +768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a2f1e10a2d9fc48bf0addfc6697fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
+  orcPool: {fileID: 82083779}
+  bloodMonsterPool: {fileID: 1133079419}
 --- !u!1001 &249365760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3030,6 +3033,52 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
   m_PrefabInstance: {fileID: 1084961138}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1133079417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133079418}
+  - component: {fileID: 1133079419}
+  m_Layer: 0
+  m_Name: BloodMonsterPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1133079418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133079417}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 234642165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1133079419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133079417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214a4950095667947bfaf7cf5427718b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
+  enemyPrefab: {fileID: 2343972199339817032, guid: 4314bdd954a6e4f448f233de68a3d531, type: 3}
+  spawnInterval: 30
 --- !u!1 &1144662673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 324781545095056700, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}

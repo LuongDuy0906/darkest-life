@@ -1,21 +1,26 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private ObjectPooler orcPool;
+    [SerializeField] private ObjectPooler orcPool;
+    [SerializeField] private ObjectPooler bloodMonsterPool;
+
     private float minDistance = 8f;
     private float maxDistance = 12f;
     private Transform playerPosition;
     private float delaySpawnTime;
     private float defaultDelaySpawnTime = 1f;
     private GameManager _gameManager;
+    private List<ObjectPooler> poolToSpawn = new();
 
     void Awake()
     {
-        orcPool = GetComponentInChildren<ObjectPooler>();
         playerPosition = FindAnyObjectByType<PlayerMovement>().transform;
         delaySpawnTime = defaultDelaySpawnTime;
         _gameManager = FindAnyObjectByType<GameManager>();
+
+        poolToSpawn.Add(orcPool);
     }
 
     void OnEnable()
@@ -38,14 +43,22 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        if((_gameManager.CurrentLevel >= 5 || _gameManager.TimeSurvived >= 60f) && !poolToSpawn.Contains(bloodMonsterPool))
+        {
+            poolToSpawn.Add(bloodMonsterPool);
+        }
+
         if(delaySpawnTime > 0f)
         {
             delaySpawnTime -= Time.deltaTime;
         } else
         {
-            Vector3 ramdonSpawnPosition = RandomSpawnPosition();
-            orcPool.GetPool(ramdonSpawnPosition);
-            delaySpawnTime = defaultDelaySpawnTime;
+            foreach(ObjectPooler pool in poolToSpawn)
+            {
+                Vector3 randomSpawnPosition = RandomSpawnPosition();
+                pool.GetPool(randomSpawnPosition);
+                delaySpawnTime = defaultDelaySpawnTime;
+            }
         }
     }
 
@@ -64,7 +77,9 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void HandleEnemyDestroy(GameObject enemy)
-    {
-        orcPool.RestorePool(enemy);
+    {   
+        ObjectPooler enemyPool = enemy.GetComponentInParent<ObjectPooler>();
+
+        enemyPool.RestorePool(enemy);
     }
 }
