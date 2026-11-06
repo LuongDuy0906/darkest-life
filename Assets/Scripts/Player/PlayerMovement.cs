@@ -9,8 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    private float _moveX;
-    private float _moveY;
+    private Vector2 _move;
     private SpriteRenderer playerSpriteRender;
 
     private void Awake() {
@@ -28,20 +27,27 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
-        Movement();
+        _move = moveInput.action.ReadValue<Vector2>();
         UpdateAnimation();
+        Flip();
+    }
+
+    void FixedUpdate()
+    {
+        Movement();
     }
 
     private void Movement()
     {
-        _moveX = moveInput.action.ReadValue<Vector2>().x;
-        _moveY = moveInput.action.ReadValue<Vector2>().y;
- 
-        rb.linearVelocity = new Vector2(speed * _moveX, rb.linearVelocity.y);
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed * _moveY);
+        rb.linearVelocity = _move * speed;
+    }
 
-        if (_moveX != 0)
-            playerSpriteRender.flipX = _moveX < 0;
+    private void Flip()
+    {
+        if(_move.x != 0)
+        {
+            playerSpriteRender.flipX = _move.x < 0;
+        }
     }
 
     private void UpdateAnimation()

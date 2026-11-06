@@ -5,7 +5,7 @@ public class PlayerCollision : MonoBehaviour
 {
     public static event Action<float> OnTakeDamage;
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.TryGetComponent<Enemy>(out var enemy))
         {

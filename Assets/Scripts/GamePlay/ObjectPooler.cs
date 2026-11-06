@@ -4,16 +4,20 @@ using UnityEngine;
 public class ObjectPooler : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private int spawnInterval;
+    [SerializeField] private int poolSize;
 
     private Queue<GameObject> available = new();
+    private Transform _playerTransform;
 
     void Awake()
     {
-        for(int i = 0; i < spawnInterval; i++)
+        _playerTransform = FindAnyObjectByType<PlayerMovement>().transform;
+
+        for(int i = 0; i < poolSize; i++)
         {
             GameObject enemy = Instantiate(enemyPrefab, transform);
             enemy.SetActive(false);
+            enemy.GetComponent<Enemy>().Initialize(_playerTransform);
             available.Enqueue(enemy);
         }
     }

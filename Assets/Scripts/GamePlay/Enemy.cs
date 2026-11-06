@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private EnemyData data;
 
-    private Transform playerObject;
+    private Transform _playerTransform;
     private SpriteRenderer enemyRender;
     private float _currentHealth;
     public int ExpEarned => data.expEarned;
@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
-        playerObject = FindAnyObjectByType<PlayerMovement>().transform;
         enemyRender = GetComponent<SpriteRenderer>();     
         rb = GetComponent<Rigidbody2D>();  
     }
@@ -38,17 +37,17 @@ public class Enemy : MonoBehaviour
     {
         Vector2 nextPosition = Vector2.MoveTowards(
             rb.position,
-            playerObject.position,
+            _playerTransform.position,
             data.speed * Time.fixedDeltaTime
         );
 
         rb.MovePosition(nextPosition);
 
-        float deltaX = playerObject.position.x - rb.position.x;
+        float deltaX = _playerTransform.position.x - rb.position.x;
         if (Mathf.Abs(deltaX) > 0.01f)
             enemyRender.flipX = deltaX < 0f;
 
-        if(Vector3.Distance(playerObject.transform.position, transform.position) >= maxDistance)
+        if(Vector3.Distance(_playerTransform.transform.position, transform.position) >= maxDistance)
         {
             OnEnemyDisappear?.Invoke(gameObject);
         }
@@ -56,11 +55,21 @@ public class Enemy : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        _currentHealth = Mathf.Max(0, _currentHealth - damage);
+        if(_currentHealth <= 0f)
+        {
+            return;
+        }
 
-        if(_currentHealth == 0)
+        _currentHealth = Mathf.Max(0f, _currentHealth - damage);
+
+        if(_currentHealth == 0f)
         {
             OnEnemyDestroy?.Invoke(gameObject);
         }
+    }
+
+    public void Initialize(Transform playerTransform)
+    {
+        _playerTransform = playerTransform;
     }
 }

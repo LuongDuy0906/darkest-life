@@ -6,13 +6,14 @@ public class PlayerHeatlh : MonoBehaviour
     public static Action OnPlayerDie;
 
     [SerializeField] private Transform healthBar;
+    [SerializeField] private float damageCooldown = 0.5f;
 
     private float _currentLives;
-    private float _maxLives = 100;
+    private float _maxLives = 30;
     private Vector3 _healthBarOriginalScale;
     private GameManager gameManager;
-    private bool _isTakeDamage;
     private Animator animator;
+    private float nextDamageTime;
 
     void Awake()
     {
@@ -43,6 +44,9 @@ public class PlayerHeatlh : MonoBehaviour
     private void HandleTakeDamage(float damage)
     {
         if(gameManager.GetGameState() != GameState.Playing) return;
+        if (Time.time < nextDamageTime) return;
+
+        nextDamageTime = Time.time + damageCooldown;
 
         _currentLives -= damage;
         _currentLives = Mathf.Max(_currentLives, 0);

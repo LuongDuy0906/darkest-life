@@ -578,7 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
   enemyPrefab: {fileID: 7944344869194008529, guid: edc12158298a5ce449a68b9149cd4e14, type: 3}
-  spawnInterval: 30
+  poolSize: 30
 --- !u!1001 &117758521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3080,7 +3080,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
   enemyPrefab: {fileID: 7503189517845508733, guid: 5262acfbb77b49d4db637ad3ecdc042a, type: 3}
-  spawnInterval: 30
+  poolSize: 30
 --- !u!1 &1133079417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,7 +3126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
   enemyPrefab: {fileID: 2343972199339817032, guid: 4314bdd954a6e4f448f233de68a3d531, type: 3}
-  spawnInterval: 30
+  poolSize: 30
 --- !u!1 &1144662673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 324781545095056700, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}

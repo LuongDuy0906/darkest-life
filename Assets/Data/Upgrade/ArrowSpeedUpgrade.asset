@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArrowSpeedUpgrade
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
   upgradeName: Faster
-  upgradeInfo: ' x2 Arrow Speed'
+  upgradeInfo: ' Increase 10% Arrow Speed'
   icon: {fileID: -1847950937021801469, guid: 7e166f7847391154585c598fc4e959e8, type: 3}
   upgradeType: 0
-  upgradeValue: 2
+  upgradeValue: 1.1
