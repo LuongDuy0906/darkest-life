@@ -42,7 +42,7 @@ public class GamePlayUI : MonoBehaviour
     {
         int minutes = Mathf.FloorToInt(time / 60f);
         int seconds = Mathf.FloorToInt(time % 60f);
-        return $"{minutes}:{seconds}";
+        return $"{minutes:00}:{seconds:00}";
     }
 
     public void UpdateTimePlayText(float timePlay)
