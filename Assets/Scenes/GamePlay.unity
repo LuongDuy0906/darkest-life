@@ -412,7 +412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &69979395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -793,7 +793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.x
@@ -801,7 +801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_SizeDelta.x
@@ -841,11 +841,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 336.115
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -59.1525
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1077,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1085,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1125,11 +1125,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 336.115
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -187.45749
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2246,7 +2246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2564,7 +2564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2950,7 +2950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2958,7 +2958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2998,11 +2998,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 336.115
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -315.76248
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3316,7 +3316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3830,7 +3830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.x
@@ -3838,7 +3838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3878,11 +3878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 336.115
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -444.06747
       objectReference: {fileID: 0}
     - target: {fileID: 2136792632709197067, guid: 0ad9e6aa6f6a2dc4faae7a396d1aabec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4250,7 +4250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
