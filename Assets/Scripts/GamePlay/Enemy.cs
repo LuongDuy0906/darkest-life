@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
 
     private Transform playerObject;
     private SpriteRenderer enemyRender;
-    private float speed = 1.5f;
     private float _currentHealth;
     public int ExpEarned => data.expEarned;
     public float Damage => data.damage;
@@ -40,7 +39,7 @@ public class Enemy : MonoBehaviour
         Vector2 nextPosition = Vector2.MoveTowards(
             rb.position,
             playerObject.position,
-            speed * Time.fixedDeltaTime
+            data.speed * Time.fixedDeltaTime
         );
 
         rb.MovePosition(nextPosition);
