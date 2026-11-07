@@ -67,4 +67,10 @@ public class ArrowPool : MonoBehaviour
     {
         ArrowDamage *= damage;
     }
+
+    public void AddArrow()
+    {
+        arrows += 1;
+        OnArrowsChanged?.Invoke(arrows);
+    }
 }

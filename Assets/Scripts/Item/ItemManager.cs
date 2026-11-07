@@ -5,48 +5,55 @@ public class ItemManager : MonoBehaviour
 {
     [SerializeField] private List<ItemPool> itemPools;
 
-    private float minDistance = 1f;
-    private float maxDistance = 1f;
+    private ArrowPool _arrowPool;
+
+    void Awake()
+    {
+        _arrowPool = FindAnyObjectByType<ArrowPool>();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
-        Enemy.OnEnemyDestroy += HandleEnemeDestroy;
+        Enemy.OnEnemyDestroy += HandleEnemyDestroy;
+        PlayerCollision.OnTakeItem += HandleItemTaked;
     }
 
     void OnDisable()
     {
-        Enemy.OnEnemyDestroy -= HandleEnemeDestroy;
+        Enemy.OnEnemyDestroy -= HandleEnemyDestroy;
+        PlayerCollision.OnTakeItem -= HandleItemTaked;
     }
 
-    private void HandleEnemeDestroy(GameObject enemy)
+    private void HandleEnemyDestroy(GameObject enemy)
     {
         Transform enemyTransform = enemy.transform;
         Enemy destroyedEnemy = enemy.GetComponent<Enemy>();
 
         foreach(ItemPool itemPool in itemPools)
         {
-            Vector3 randomPosition = RandomSpawnPosition(enemyTransform);
             int numberItemToToReturn = destroyedEnemy.GetNumberItemToReturn(itemPool.ItemData.itemType);
             if(destroyedEnemy.GetItemDrop().Contains(itemPool.ItemData))
             {
-
-                itemPool.GetPool(randomPosition, numberItemToToReturn);
+                itemPool.GetPool(enemyTransform.position, numberItemToToReturn);
             }
         }
     }
 
-    private Vector3 RandomSpawnPosition(Transform enemyTransform)
+    private void HandleItemTaked(Item item)
     {
-        float angle = Random.Range(0f, Mathf.PI * 2f);
-        float distance = Random.Range(minDistance, maxDistance);
+        if (!item.gameObject.activeSelf) return;
 
-        Vector3 spawnPosition = enemyTransform.position + new Vector3(
-            Mathf.Cos(angle),
-            Mathf.Sin(angle),
-            0f
-        ) * distance;
+        ItemPool itemPool = item.GetComponentInParent<ItemPool>();
+        if (itemPool == null) return;
 
-        return spawnPosition;
+        switch (item.ItemType)
+        {
+            case ItemType.Arrow:
+                _arrowPool.AddArrow();
+                break;
+        }
+
+        itemPool.RestorePool(item.gameObject);
     }
 }

@@ -9,6 +9,8 @@ public class ItemPool : MonoBehaviour
     public ItemData ItemData => itemData;
     private int _defaultItemDrop = 20;
     private Queue<GameObject> availableItem = new();
+    private float minDistance = 1f;
+    private float maxDistance = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,20 +23,16 @@ public class ItemPool : MonoBehaviour
         }
     }
 
-    public GameObject GetPool(Vector3 spawnPosition, int spawnInterval)
+    public void GetPool(Vector3 spawnPosition, int spawnInterval)
     {
-        if (availableItem.Count != 0)
-        {
-            while(spawnInterval > 0) {
-                GameObject item = availableItem.Dequeue();
-                item.transform.position = spawnPosition;
-                item.SetActive(true);
-                spawnInterval--;
-                return item;
-            }
+        while(spawnInterval > 0 && availableItem.Count > 0) {
+            Vector3 randomPosition = RandomSpawnPosition(spawnPosition);
+            GameObject item = availableItem.Dequeue();
+            item.transform.position = randomPosition;
+            item.SetActive(true);
+            Debug.Log(spawnInterval);
+            spawnInterval--;
         }
-
-        return null;
     }
 
     public void RestorePool(GameObject item)
@@ -43,5 +41,19 @@ public class ItemPool : MonoBehaviour
 
         item.SetActive(false);
         availableItem.Enqueue(item);
+    }
+
+        private Vector3 RandomSpawnPosition(Vector3 enemyPosition)
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+        float distance = Random.Range(minDistance, maxDistance);
+
+        Vector3 spawnPosition = enemyPosition + new Vector3(
+            Mathf.Cos(angle),
+            Mathf.Sin(angle),
+            0f
+        ) * distance;
+
+        return spawnPosition;
     }
 }
