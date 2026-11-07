@@ -15,4 +15,7 @@ MonoBehaviour:
   maxHealth: 2
   damage: 1
   speed: 1.5
+  dropItems:
+  - {fileID: 11400000, guid: 7491a6f8bc4dd924084a27f0180af1a7, type: 2}
   expEarned: 1
+  arrowEarned: 1

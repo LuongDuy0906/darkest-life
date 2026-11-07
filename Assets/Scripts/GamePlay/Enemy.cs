@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -71,5 +72,23 @@ public class Enemy : MonoBehaviour
     public void Initialize(Transform playerTransform)
     {
         _playerTransform = playerTransform;
+    }
+
+    public List<ItemData> GetItemDrop()
+    {
+        return data.dropItems;
+    }
+
+    public int GetNumberItemToReturn(ItemType type)
+    {
+        switch(type)
+        {
+            case ItemType.Exp:
+                return data.expEarned;
+            case ItemType.Arrow:
+                return data.arrowEarned;
+            default:
+                return 0;
+        }
     }
 }
