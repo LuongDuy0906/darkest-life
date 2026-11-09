@@ -6,23 +6,25 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private List<ItemPool> itemPools;
 
     private ArrowPool _arrowPool;
+    private PlayerExp _playerExp;
 
     void Awake()
     {
         _arrowPool = FindAnyObjectByType<ArrowPool>();
+        _playerExp = FindAnyObjectByType<PlayerExp>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
         Enemy.OnEnemyDestroy += HandleEnemyDestroy;
-        PlayerCollision.OnTakeItem += HandleItemTaked;
+        PlayerCollision.OnTakeItem += HandleItemTaken;
     }
 
     void OnDisable()
     {
         Enemy.OnEnemyDestroy -= HandleEnemyDestroy;
-        PlayerCollision.OnTakeItem -= HandleItemTaked;
+        PlayerCollision.OnTakeItem -= HandleItemTaken;
     }
 
     private void HandleEnemyDestroy(GameObject enemy)
@@ -32,6 +34,7 @@ public class ItemManager : MonoBehaviour
 
         foreach(ItemPool itemPool in itemPools)
         {
+            Debug.Log(itemPool.ItemData.itemType);
             int numberItemToToReturn = destroyedEnemy.GetNumberItemToReturn(itemPool.ItemData.itemType);
             if(destroyedEnemy.GetItemDrop().Contains(itemPool.ItemData))
             {
@@ -40,8 +43,10 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-    private void HandleItemTaked(Item item)
+    private void HandleItemTaken(Item item)
     {
+        bool itemCollected = false;
+
         if (!item.gameObject.activeSelf) return;
 
         ItemPool itemPool = item.GetComponentInParent<ItemPool>();
@@ -50,10 +55,17 @@ public class ItemManager : MonoBehaviour
         switch (item.ItemType)
         {
             case ItemType.Arrow:
-                _arrowPool.AddArrow();
+                itemCollected = _arrowPool.AddArrow();
+                break;
+            case ItemType.Exp:
+                _playerExp.EarnedExp(1);
+                itemCollected = true;
                 break;
         }
 
-        itemPool.RestorePool(item.gameObject);
+        if(itemCollected)
+        {
+            itemPool.RestorePool(item.gameObject);
+        }
     }
 }

@@ -9,7 +9,7 @@ public class PlayerHeatlh : MonoBehaviour
     [SerializeField] private float damageCooldown = 0.5f;
 
     private float _currentLives;
-    private float _maxLives = 30;
+    private float _maxLives = 20;
     private Vector3 _healthBarOriginalScale;
     private GameManager gameManager;
     private Animator animator;
