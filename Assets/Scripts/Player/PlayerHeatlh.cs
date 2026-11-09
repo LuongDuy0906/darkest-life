@@ -48,8 +48,6 @@ public class PlayerHeatlh : MonoBehaviour
         if(gameManager.GetGameState() != GameState.Playing) return;
         if (Time.time < nextDamageTime) return;
 
-        _audioManager.PlayDamageTakenSound();
-
         nextDamageTime = Time.time + damageCooldown;
 
         _currentLives -= damage;
@@ -59,8 +57,11 @@ public class PlayerHeatlh : MonoBehaviour
 
         if(_currentLives == 0)
         {
+            _audioManager.PlayGameOverSound();
             OnPlayerDie?.Invoke();
+            return;
         }
+        _audioManager.PlayDamageTakenSound();
     }
 
     public void UpgradePlayerHealth(float health)

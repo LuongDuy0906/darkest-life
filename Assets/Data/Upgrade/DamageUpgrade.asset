@@ -16,4 +16,4 @@ MonoBehaviour:
   upgradeInfo: Increase 10% Arrow Damage
   icon: {fileID: -6946915203815560687, guid: bd80ee55f5a5bce44a1bfe9347d25157, type: 3}
   upgradeType: 1
-  upgradeValue: 1.1
+  upgradeValue: 1.5

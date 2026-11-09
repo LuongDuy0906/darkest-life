@@ -35,6 +35,7 @@ public class PlayerExp : MonoBehaviour
             _currentLevel += 1;
             _maxExp = RequiredExp(_currentLevel);
             OnLevelUp?.Invoke(_currentLevel);
+            _audioManager.PlayLevelUpSound();
         }
 
         float expPercent = _currentExp / _maxExp;

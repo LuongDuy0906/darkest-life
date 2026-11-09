@@ -4044,7 +4044,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4147,6 +4147,11 @@ MonoBehaviour:
   bowShootingSound: {fileID: 8300000, guid: ba31c89645569a34cb98dfbd676dd76a, type: 3}
   itemCollectedSound: {fileID: 8300000, guid: 1f8d01be85b69c14cbb6f24752ac2ed3, type: 3}
   expOrbCollectedSound: {fileID: 8300000, guid: a22d2f427b056c34fa5535537880158e, type: 3}
+  damageTakenSound: {fileID: 8300000, guid: dcc5e4cd837d6844fa5e632b73bb66d8, type: 3}
+  gameOverSound: {fileID: 8300000, guid: fc267c2f5d1ce214bb39a55b44eca4f7, type: 3}
+  levelUpSound: {fileID: 8300000, guid: 8e7a3be78810de547a9c2fa379a76ba7, type: 3}
+  outOfArrowSound: {fileID: 8300000, guid: 27176d94ffcaf714293fdbc1649b89fc, type: 3}
+  hitEnemySound: {fileID: 8300000, guid: 6a7a1a157c655df4ba5d19037ae3064b, type: 3}
 --- !u!82 &1656545460
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4160,7 +4165,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

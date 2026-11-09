@@ -29,7 +29,7 @@ public class ArrowPool : MonoBehaviour
         for(int i = 0; i < defaultArrow; i++)
         {
             GameObject arrow = Instantiate(arrowPrefab, transform);
-            arrow.GetComponent<ArrowCollision>().Initialize(this);
+            arrow.GetComponent<ArrowCollision>().Initialize(this, _audioManager);
             arrow.GetComponent<ArrowMovement>().Initialize(this);
             arrow.SetActive(false);
             available.Enqueue(arrow);
@@ -47,6 +47,9 @@ public class ArrowPool : MonoBehaviour
             arrow.SetActive(true);
             arrows--;
             OnArrowsChanged?.Invoke(arrows); 
+        } else if (arrows <= 0)
+        {
+            _audioManager.PlayOutOfArrowSound();
         }
     }
 

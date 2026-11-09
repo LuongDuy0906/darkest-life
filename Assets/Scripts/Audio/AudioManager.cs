@@ -11,6 +11,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip itemCollectedSound;
     [SerializeField] private AudioClip expOrbCollectedSound;
     [SerializeField] private AudioClip damageTakenSound;
+    [SerializeField] private AudioClip gameOverSound;
+    [SerializeField] private AudioClip levelUpSound;
+    [SerializeField] private AudioClip outOfArrowSound;
+    [SerializeField] private AudioClip hitEnemySound;
 
     void Awake()
     {
@@ -39,4 +43,12 @@ public class AudioManager : MonoBehaviour
     public void PlayItemCollectedSound() => PlaySoundEffect(itemCollectedSound);
     public void PlayExpOrbCollectedSound() => PlaySoundEffect(expOrbCollectedSound);
     public void PlayDamageTakenSound() => PlaySoundEffect(damageTakenSound);
+    public void PlayGameOverSound() => PlaySoundEffect(gameOverSound);
+    public void PlayLevelUpSound() => PlaySoundEffect(levelUpSound);
+    public void PlayOutOfArrowSound() => PlaySoundEffect(outOfArrowSound);
+    public void PlayHitEnemySound()
+    {
+        sfxSource.volume = 0.1f;
+        PlaySoundEffect(hitEnemySound);
+    }
 }
