@@ -8,8 +8,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip gamePlayBackgroundMusic;
     [SerializeField] private AudioClip mainMenuBackgroundMusic;
     [SerializeField] private AudioClip bowShootingSound;
+    [SerializeField] private AudioClip itemCollectedSound;
+    [SerializeField] private AudioClip expOrbCollectedSound;
+    [SerializeField] private AudioClip damageTakenSound;
 
-    void Start()
+    void Awake()
     {
         PlayMusic();
     }
@@ -33,4 +36,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayBowShootingSound() => PlaySoundEffect(bowShootingSound);
+    public void PlayItemCollectedSound() => PlaySoundEffect(itemCollectedSound);
+    public void PlayExpOrbCollectedSound() => PlaySoundEffect(expOrbCollectedSound);
+    public void PlayDamageTakenSound() => PlaySoundEffect(damageTakenSound);
 }

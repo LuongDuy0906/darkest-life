@@ -14,6 +14,7 @@ public class PlayerHeatlh : MonoBehaviour
     private GameManager gameManager;
     private Animator animator;
     private float nextDamageTime;
+    private AudioManager _audioManager;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class PlayerHeatlh : MonoBehaviour
         _currentLives = _maxLives;
         gameManager = FindAnyObjectByType<GameManager>();
         animator = GetComponent<Animator>();
+        _audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     void OnEnable()
@@ -45,6 +47,8 @@ public class PlayerHeatlh : MonoBehaviour
     {
         if(gameManager.GetGameState() != GameState.Playing) return;
         if (Time.time < nextDamageTime) return;
+
+        _audioManager.PlayDamageTakenSound();
 
         nextDamageTime = Time.time + damageCooldown;
 

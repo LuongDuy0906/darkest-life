@@ -9,12 +9,14 @@ public class PlayerExp : MonoBehaviour
     private float _currentExp;
     private float _maxExp;
     private int _currentLevel;
+    private AudioManager _audioManager;
 
     void Awake()
     {
         _currentExp = 0f;
         _currentLevel = 1;
         _maxExp = RequiredExp(_currentLevel);
+        _audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     private int RequiredExp(int level)
@@ -24,6 +26,7 @@ public class PlayerExp : MonoBehaviour
 
     public void EarnedExp(int expEarned)
     {
+        _audioManager.PlayExpOrbCollectedSound();
         _currentExp += expEarned;
 
         while(_currentExp >= _maxExp)

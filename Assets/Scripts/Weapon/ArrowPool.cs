@@ -71,6 +71,7 @@ public class ArrowPool : MonoBehaviour
     public bool AddArrow()
     {
         if(arrows == defaultArrow) return false;
+        _audioManager.PlayItemCollectedSound();
         arrows += 1;
         OnArrowsChanged?.Invoke(arrows);
         return true;

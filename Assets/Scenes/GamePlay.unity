@@ -4145,6 +4145,8 @@ MonoBehaviour:
   gamePlayBackgroundMusic: {fileID: 8300000, guid: a8994f74e10955b4f92cc0ae956c1e58, type: 3}
   mainMenuBackgroundMusic: {fileID: 8300000, guid: a8994f74e10955b4f92cc0ae956c1e58, type: 3}
   bowShootingSound: {fileID: 8300000, guid: ba31c89645569a34cb98dfbd676dd76a, type: 3}
+  itemCollectedSound: {fileID: 8300000, guid: 1f8d01be85b69c14cbb6f24752ac2ed3, type: 3}
+  expOrbCollectedSound: {fileID: 8300000, guid: a22d2f427b056c34fa5535537880158e, type: 3}
 --- !u!82 &1656545460
 AudioSource:
   m_ObjectHideFlags: 0
