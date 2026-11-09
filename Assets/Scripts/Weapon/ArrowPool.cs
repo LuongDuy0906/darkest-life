@@ -14,11 +14,13 @@ public class ArrowPool : MonoBehaviour
     public float ArrowDamage = 1f;
     public float ArrowSpeed = 5f;
     private int arrows;
+    private AudioManager _audioManager;
 
     void Awake()
     {
         arrows = defaultArrow;
         OnArrowsChanged?.Invoke(arrows);
+        _audioManager = FindAnyObjectByType<AudioManager>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,20 +36,18 @@ public class ArrowPool : MonoBehaviour
         }
     }
 
-    public GameObject GetPool(Vector3 spawnPosition, Quaternion spawnRotation)
+    public void GetPool(Vector3 spawnPosition, Quaternion spawnRotation)
     {
         if (available.Count != 0 && arrows > 0)
         {
+            _audioManager.PlayBowShootingSound();
             GameObject arrow = available.Dequeue();
             arrow.transform.position = spawnPosition;
             arrow.transform.rotation = spawnRotation;
             arrow.SetActive(true);
             arrows--;
-            OnArrowsChanged?.Invoke(arrows);
-            return arrow;
+            OnArrowsChanged?.Invoke(arrows); 
         }
-
-        return null;
     }
 
     public void RestorePool(GameObject arrow)
