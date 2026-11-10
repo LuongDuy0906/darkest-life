@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public enum GameState
 {
+    MainMenu,
     Playing,
     Paused,
     LevelUp,
@@ -12,6 +13,8 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public static Action<int, float> OnGameOver;
     public static Action OnStillLevelingUp;
 
@@ -24,20 +27,31 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-       SetGameState(GameState.Playing);
-       _pendingUpdateChoice = 0;
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        } else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        SetGameState(GameState.MainMenu);
     }
 
     void OnEnable()
     {
         PlayerHeatlh.OnPlayerDie += HandlePlayerDie;
         PlayerExp.OnLevelUp += HandleLevelUp;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
     }
 
     void OnDisable()
     {
         PlayerHeatlh.OnPlayerDie -= HandlePlayerDie;
         PlayerExp.OnLevelUp -= HandleLevelUp;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
     void Update()
@@ -73,9 +87,13 @@ public class GameManager : MonoBehaviour
 
     private void HandleLevelUp(int level)
     {   
-        if(_currentState == GameState.GameOver || _currentState == GameState.Paused) return;
-        SetGameState(GameState.LevelUp);
         _currentLevel = level;
+
+        if(level <= 1) return;
+
+        if(_currentState == GameState.GameOver || _currentState == GameState.Paused) return;
+
+        SetGameState(GameState.LevelUp);
         _pendingUpdateChoice += 1;
     }
 
@@ -124,11 +142,38 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("GamePlay");
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayGame()
+    {   
+        SceneManager.LoadScene("GamePlay");
+        SetGameState(GameState.Playing);
+    }
+
+    private void ResetGameStat()
+    {
+        SetTimeScale(1);
+        SetGameState(GameState.Playing);
+        _timeSurvive = 0f;
+        _pendingUpdateChoice = 0;
+    }
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(_currentState == GameState.MainMenu) return;
+
+        ResetGameStat();
+    }
+
+    public void GoToMainMenu()
+    {
+        SetGameState(GameState.MainMenu);
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioClip gamePlayBackgroundMusic;
@@ -22,19 +24,32 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        PlayMusic();
-    }
-
-    private void PlayMusic()
-    {
-        if(SceneManager.GetActiveScene().name == "MainMenu")
+        if(Instance != null && Instance != this)
         {
-            musicSource.clip = mainMenuBackgroundMusic;
+            Destroy(gameObject);
+            return;
         } else
         {
-            musicSource.clip = gamePlayBackgroundMusic;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+    }
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
+    }
+
+    private void PlayMusic(AudioClip clip)
+    {
+        if(musicSource.clip == clip && musicSource.isPlaying) return;
+        
+        musicSource.clip = clip;
         musicSource.Play();
     }
 
@@ -52,4 +67,19 @@ public class AudioManager : MonoBehaviour
     public void PlayOutOfArrowSound() => PlaySoundEffect(outOfArrowSound, defaultEffectVolume);
     public void PlayHitEnemySound() => PlaySoundEffect(hitEnemySound, 0.25f);
     public void PlayButtonClickSound() => PlaySoundEffect(buttonClickSound, 0.5f);
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        AudioClip clipToPlay;
+
+        if(scene.name == "MainMenu")
+        {
+            clipToPlay = mainMenuBackgroundMusic;
+        } else
+        {
+            clipToPlay = gamePlayBackgroundMusic;
+        }
+
+        PlayMusic(clipToPlay);
+    }
 }

@@ -22,7 +22,7 @@ public class PlayerHeatlh : MonoBehaviour
         _currentLives = _maxLives;
         gameManager = FindAnyObjectByType<GameManager>();
         animator = GetComponent<Animator>();
-        _audioManager = FindAnyObjectByType<AudioManager>();
+        _audioManager = AudioManager.Instance;
     }
 
     void OnEnable()

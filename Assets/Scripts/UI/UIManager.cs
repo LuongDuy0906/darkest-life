@@ -1,18 +1,29 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    private GamePlayUI gamePlayUI;
-    private GameManager gameManager;
+    public static UIManager Instance { get; private set; }
+
+    [SerializeField] private GamePlayUI gamePlayUI;
+    [SerializeField] private MainMenuUI mainMenuUI;
     private int lastDisplayedSecond = -1;
 
     void Awake()
     {
-        gamePlayUI = FindAnyObjectByType<GamePlayUI>();
-        gameManager = FindAnyObjectByType<GameManager>();
+        if(Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        } else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        gamePlayUI.GetExpOriginalScale();
     }
 
     void OnEnable()
@@ -22,6 +33,7 @@ public class UIManager : MonoBehaviour
         PlayerExp.OnLevelUp += HandleLevelUp;
         GameManager.OnStillLevelingUp += HandleStillLevelingUp;
         ArrowPool.OnArrowsChanged += HandleArrowsChanged;
+        SceneManager.sceneLoaded += HandleSceneLoaded;
     }
 
     void OnDisable()
@@ -31,11 +43,15 @@ public class UIManager : MonoBehaviour
         PlayerExp.OnLevelUp -= HandleLevelUp;
         GameManager.OnStillLevelingUp -= HandleStillLevelingUp;
         ArrowPool.OnArrowsChanged -= HandleArrowsChanged;
+        SceneManager.sceneLoaded -= HandleSceneLoaded;
     }
 
     void Update()
     {
-        HandleUpdateTimePlay();
+        if(GameManager.Instance.GetGameState() == GameState.Playing)
+        {
+            HandleUpdateTimePlay();
+        }
 
         if(Keyboard.current.escapeKey.wasPressedThisFrame)
         {
@@ -55,14 +71,17 @@ public class UIManager : MonoBehaviour
 
     private void HandleLevelUp(int level)
     {   
-        if(gameManager.GetGameState() == GameState.GameOver || gameManager.GetGameState() == GameState.Paused) return;
         gamePlayUI.UpdateLevelText(level);
+
+        if(level <= 1) return;
+
+        if(GameManager.Instance.GetGameState() == GameState.GameOver || GameManager.Instance.GetGameState() == GameState.Paused) return;
         gamePlayUI.ShowUpgradePanel();
     }
 
     private void HandleUpdateTimePlay()
     {
-        int second = Mathf.FloorToInt(gameManager.TimeSurvived);
+        int second = Mathf.FloorToInt(GameManager.Instance.TimeSurvived);
         if (second == lastDisplayedSecond) return;
 
         lastDisplayedSecond = second;
@@ -71,8 +90,8 @@ public class UIManager : MonoBehaviour
 
     public void PauseGame()
     {
-        gameManager.TogglePauseMenu();
-        gamePlayUI.ShowPausePanel(gameManager.GetGameState() == GameState.Paused);
+        GameManager.Instance.TogglePauseMenu();
+        gamePlayUI.ShowPausePanel(GameManager.Instance.GetGameState() == GameState.Paused);
     }
 
     public IEnumerator ShowNextUpgradePanel()
@@ -89,5 +108,19 @@ public class UIManager : MonoBehaviour
     private void HandleArrowsChanged(int arrows)
     {
         gamePlayUI.ChangeArrowText(arrows);
+    }
+
+    private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(GameManager.Instance.GetGameState() == GameState.MainMenu)
+        {
+            gamePlayUI.gameObject.SetActive(false);
+            mainMenuUI.gameObject.SetActive(true);
+        } else
+        {
+            gamePlayUI.gameObject.SetActive(true);
+            gamePlayUI.ShowUI();
+            mainMenuUI.gameObject.SetActive(false);
+        }
     }
 }

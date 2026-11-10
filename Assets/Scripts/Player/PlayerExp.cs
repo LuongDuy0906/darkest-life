@@ -14,9 +14,11 @@ public class PlayerExp : MonoBehaviour
     void Awake()
     {
         _currentExp = 0f;
+        OnExpChanged?.Invoke(_currentExp);
         _currentLevel = 1;
+        OnLevelUp?.Invoke(_currentLevel);
         _maxExp = RequiredExp(_currentLevel);
-        _audioManager = FindAnyObjectByType<AudioManager>();
+        _audioManager = AudioManager.Instance;
     }
 
     private int RequiredExp(int level)

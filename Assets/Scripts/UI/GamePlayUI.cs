@@ -22,14 +22,18 @@ public class GamePlayUI : MonoBehaviour
 
     private Vector3 _expBarOriginalScale;
 
-    void Awake()
+    public void GetExpOriginalScale()
+    {
+        _expBarOriginalScale = expBar.localScale;
+        expBar.localScale = new Vector3(0f, _expBarOriginalScale.y, _expBarOriginalScale.z);
+    }
+
+    public void ShowUI()
     {
         levelText.gameObject.SetActive(true);
         expBar.gameObject.SetActive(true);
         pauseButton.SetActive(true);
         gameOverUI.SetActive(false);
-        _expBarOriginalScale = expBar.localScale;
-        expBar.localScale = new Vector3(0f, _expBarOriginalScale.y, _expBarOriginalScale.z);
         upgradePanel.SetActive(false);
         pausePanel.SetActive(false);
     }

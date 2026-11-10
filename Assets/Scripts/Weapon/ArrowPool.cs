@@ -20,7 +20,7 @@ public class ArrowPool : MonoBehaviour
     {
         arrows = defaultArrow;
         OnArrowsChanged?.Invoke(arrows);
-        _audioManager = FindAnyObjectByType<AudioManager>();
+        _audioManager = AudioManager.Instance;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

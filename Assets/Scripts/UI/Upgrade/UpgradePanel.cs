@@ -14,12 +14,12 @@ public class UpgradePanel : MonoBehaviour
 
     void Awake()
     {
-        _upgradeManager = FindAnyObjectByType<UpgradeManager>();
         _gameManager = FindAnyObjectByType<GameManager>();
     }
 
     void OnEnable()
     {
+        _upgradeManager = FindAnyObjectByType<UpgradeManager>();
         ShowUpgradeCard();
     }
 
