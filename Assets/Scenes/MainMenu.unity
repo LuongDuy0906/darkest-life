@@ -4244,6 +4244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   gamePlayUI: {fileID: 1233425279}
   mainMenuUI: {fileID: 1430055626}
+  mainMenuCursor: {fileID: 2800000, guid: b50b535d3e9bcfd41acf649442b8bdea, type: 3}
+  gamePlayCursor: {fileID: 2800000, guid: 4f2e1f7f7a9e90c40a40bbdcfa02a456, type: 3}
 --- !u!114 &648370375
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GamePlayUI gamePlayUI;
     [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private Texture2D mainMenuCursor;
+    [SerializeField] private Texture2D gamePlayCursor;
+
     private int lastDisplayedSecond = -1;
     private bool _waitingForUpgradePanel;
     private Coroutine _upgradePanelCoroutine;
@@ -146,15 +149,22 @@ public class UIManager : MonoBehaviour
     {
         CancelUpgradePanelDelay();
 
+        Vector2 center = new Vector2(
+            gamePlayCursor.width / 2f,
+            gamePlayCursor.height / 2f
+        );
+
         if(GameManager.Instance.GetGameState() == GameState.MainMenu)
         {
             gamePlayUI.gameObject.SetActive(false);
             mainMenuUI.gameObject.SetActive(true);
+            Cursor.SetCursor(mainMenuCursor, Vector2.zero, CursorMode.Auto);
         } else
         {
             gamePlayUI.gameObject.SetActive(true);
             gamePlayUI.ShowUI();
             mainMenuUI.gameObject.SetActive(false);
+            Cursor.SetCursor(gamePlayCursor, center, CursorMode.Auto);
         }
     }
 }
