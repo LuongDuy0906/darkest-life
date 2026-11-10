@@ -81,7 +81,6 @@ public class Enemy : MonoBehaviour
 
     public int GetNumberItemToReturn(ItemType type)
     {
-        Debug.Log(type);
         switch(type)
         {
             case ItemType.Exp:

@@ -166,7 +166,11 @@ public class GameManager : MonoBehaviour
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if(_currentState == GameState.MainMenu) return;
+        if(_currentState == GameState.MainMenu)
+        {
+            SetTimeScale(1);
+            return;
+        }
 
         ResetGameStat();
     }
