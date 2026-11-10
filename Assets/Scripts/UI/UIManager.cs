@@ -5,11 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private const float FirstUpgradePanelDelay = 0.8f;
+    private const float NextUpgradePanelDelay = 0.3f;
+
     public static UIManager Instance { get; private set; }
 
     [SerializeField] private GamePlayUI gamePlayUI;
     [SerializeField] private MainMenuUI mainMenuUI;
     private int lastDisplayedSecond = -1;
+    private bool _waitingForUpgradePanel;
+    private Coroutine _upgradePanelCoroutine;
 
     void Awake()
     {
@@ -38,6 +43,7 @@ public class UIManager : MonoBehaviour
 
     void OnDisable()
     {
+        CancelUpgradePanelDelay();
         GameManager.OnGameOver -= HandleGameOver;
         PlayerExp.OnExpChanged -= HandleExpChanged;
         PlayerExp.OnLevelUp -= HandleLevelUp;
@@ -76,7 +82,7 @@ public class UIManager : MonoBehaviour
         if(level <= 1) return;
 
         if(GameManager.Instance.GetGameState() == GameState.GameOver || GameManager.Instance.GetGameState() == GameState.Paused) return;
-        gamePlayUI.ShowUpgradePanel();
+        ScheduleUpgradePanel(FirstUpgradePanelDelay);
     }
 
     private void HandleUpdateTimePlay()
@@ -94,15 +100,41 @@ public class UIManager : MonoBehaviour
         gamePlayUI.ShowPausePanel(GameManager.Instance.GetGameState() == GameState.Paused);
     }
 
-    public IEnumerator ShowNextUpgradePanel()
+    private void ScheduleUpgradePanel(float delay)
     {
-        yield return new WaitForSecondsRealtime(0.3f);
-        gamePlayUI.ShowUpgradePanel();
+        if (_waitingForUpgradePanel) return;
+
+        _waitingForUpgradePanel = true;
+        _upgradePanelCoroutine = StartCoroutine(ShowUpgradePanelAfterDelay(delay));
+    }
+
+    private IEnumerator ShowUpgradePanelAfterDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+
+        _waitingForUpgradePanel = false;
+        _upgradePanelCoroutine = null;
+
+        if (GameManager.Instance.GetGameState() == GameState.LevelUp)
+        {
+            gamePlayUI.ShowUpgradePanel();
+        }
+    }
+
+    private void CancelUpgradePanelDelay()
+    {
+        if (_upgradePanelCoroutine != null)
+        {
+            StopCoroutine(_upgradePanelCoroutine);
+            _upgradePanelCoroutine = null;
+        }
+
+        _waitingForUpgradePanel = false;
     }
 
     private void HandleStillLevelingUp()
     {
-        StartCoroutine(ShowNextUpgradePanel());
+        ScheduleUpgradePanel(NextUpgradePanelDelay);
     }
 
     private void HandleArrowsChanged(int arrows)
@@ -112,6 +144,8 @@ public class UIManager : MonoBehaviour
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        CancelUpgradePanelDelay();
+
         if(GameManager.Instance.GetGameState() == GameState.MainMenu)
         {
             gamePlayUI.gameObject.SetActive(false);

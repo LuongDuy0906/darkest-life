@@ -6,6 +6,8 @@ public class PlayerExp : MonoBehaviour
     public static event Action<float> OnExpChanged;
     public static event Action<int> OnLevelUp;
 
+    [SerializeField] private ParticleSystem levelUpEffect;
+
     private float _currentExp;
     private float _maxExp;
     private int _currentLevel;
@@ -36,6 +38,7 @@ public class PlayerExp : MonoBehaviour
             _currentExp -= _maxExp;
             _currentLevel += 1;
             _maxExp = RequiredExp(_currentLevel);
+            levelUpEffect.Play();
             OnLevelUp?.Invoke(_currentLevel);
             _audioManager.PlayLevelUpSound();
         }
