@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
+    public event Action<Vector2Int> OnCenterChunkChanged;
+
     [SerializeField] private GameObject chunkPrefab;
     [SerializeField] private int chunkCellsX = 20;
     [SerializeField] private int chunkCellsY = 20;
@@ -27,6 +30,7 @@ public class MapManager : MonoBehaviour
 
         lastCenterChunk = GetPlayerChunkCoord();
         PositionChunks(lastCenterChunk);
+        OnCenterChunkChanged?.Invoke(lastCenterChunk);
     }
 
     private void Update()
@@ -38,12 +42,18 @@ public class MapManager : MonoBehaviour
 
         lastCenterChunk = centerChunk;
         PositionChunks(centerChunk);
+        OnCenterChunkChanged?.Invoke(centerChunk);
     }
 
     private Vector2Int GetPlayerChunkCoord()
     {
-        int x = Mathf.FloorToInt(playerPosition.position.x / chunkWidth);
-        int y = Mathf.FloorToInt(playerPosition.position.y / chunkHeight);
+        return GetChunkCoord(playerPosition.position);
+    }
+
+    public Vector2Int GetChunkCoord(Vector3 worldPosition)
+    {
+        int x = Mathf.FloorToInt(worldPosition.x / chunkWidth);
+        int y = Mathf.FloorToInt(worldPosition.y / chunkHeight);
 
         return new Vector2Int(x, y);
     }
