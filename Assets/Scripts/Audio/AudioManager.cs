@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip outOfArrowSound;
     [SerializeField] private AudioClip hitEnemySound;
     [SerializeField] private AudioClip buttonClickSound;
+    [SerializeField] private AudioClip buttonHoverSound;
 
 
     private float defaultEffectVolume = 0.4f;
@@ -67,6 +68,7 @@ public class AudioManager : MonoBehaviour
     public void PlayOutOfArrowSound() => PlaySoundEffect(outOfArrowSound, defaultEffectVolume);
     public void PlayHitEnemySound() => PlaySoundEffect(hitEnemySound, 0.25f);
     public void PlayButtonClickSound() => PlaySoundEffect(buttonClickSound, 0.5f);
+    public void PlayButtonHoverSound() => PlaySoundEffect(buttonHoverSound, 0.1f);
 
     private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
     {
